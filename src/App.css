@@ -1,1 +1,21 @@
 /* Other rules */
+
+/* temporaire */
+.container {
+  width: 1250px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.logo {
+  height: 100px;
+}
+.card {
+  border: 2px solid black;
+  /* height: 200px; */
+  width: 250px;
+  border-spacing: 10px;
+}
+.card img {
+  width: 100%;
+}
