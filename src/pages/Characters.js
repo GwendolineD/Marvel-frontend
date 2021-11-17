@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Character from "../components/Character";
 import Downloading from "../components/Downloading";
 
-const Characters = () => {
+const Characters = ({ favorites, setFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataCharacters, setDataCharacters] = useState({});
   const [searchName, setSearchName] = useState("");
@@ -70,7 +70,14 @@ const Characters = () => {
 
       <div className="container">
         {dataCharacters.results.map((character) => {
-          return <Character key={character._id} character={character} />;
+          return (
+            <Character
+              key={character._id}
+              character={character}
+              favorites={favorites}
+              setFavorites={setFavorites}
+            />
+          );
         })}
       </div>
     </div>
