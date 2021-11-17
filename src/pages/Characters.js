@@ -8,13 +8,16 @@ const Characters = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataCharacters, setDataCharacters] = useState({});
   const [searchName, setSearchName] = useState("");
+  const [limit, setLimit] = useState(100);
+  const [pageActive, setPageActive] = useState(1);
 
   useEffect(() => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `http://localhost:3000/characters?name=${searchName}`
-          // "http://localhost:3000/characters"
+          `http://localhost:3000/characters?name=${searchName}&limit=${limit}&skip=${
+            (pageActive - 1) * limit
+          }`
         );
         console.log(response.data);
         setDataCharacters(response.data);
@@ -24,15 +27,37 @@ const Characters = () => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [searchName]);
+  }, [searchName, limit, pageActive]);
+
+  const numberOfPages = Math.ceil(dataCharacters.count / limit);
 
   return isLoading ? (
     <Downloading />
   ) : (
     <div>
       <div className="container">{dataCharacters.count} resultats</div>
-
-      <div>
+      <div className="container">
+        <input
+          onChange={(event) => {
+            setLimit(event.target.value);
+          }}
+          type="number"
+          value={limit}
+        />{" "}
+        de comics par page
+      </div>
+      <div className="container">
+        page{" "}
+        <input
+          onChange={(event) => {
+            setPageActive(event.target.value);
+          }}
+          type="number"
+          value={pageActive}
+        />{" "}
+        sur {numberOfPages} pages
+      </div>
+      <div className="container">
         <input
           onChange={(event) => {
             setSearchName(event.target.value);
