@@ -14,6 +14,7 @@ const Comics = () => {
         const response = await axios.get("http://localhost:3000/comics");
         console.log(response.data);
         setDataComics(response.data);
+
         setIsLoading(false);
       };
       fetchData();
@@ -25,10 +26,13 @@ const Comics = () => {
   return isLoading ? (
     <Downloading />
   ) : (
-    <div className="container">
-      {dataComics.results.map((comic) => {
-        return <Comic key={comic._id} comic={comic} />;
-      })}
+    <div>
+      <div className="container">{dataCharacters.count} resultats</div>
+      <div className="container">
+        {dataComics.results.map((comic) => {
+          return <Comic key={comic._id} comic={comic} />;
+        })}
+      </div>
     </div>
   );
 };
