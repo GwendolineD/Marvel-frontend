@@ -10,11 +10,14 @@ import Favorite from "./pages/Favorite";
 import ComicsCharacter from "./pages/ComicsCharacter";
 
 function App() {
-  const favoriteLocalStorage = JSON.parse(localStorage.getItem("favorites"));
+  const favoriteChStorage = JSON.parse(localStorage.getItem("favoritesCh"));
   const [favoriteCharacters, setFavoriteCharacters] = useState(
-    favoriteLocalStorage ? favoriteLocalStorage : []
+    favoriteChStorage ? favoriteChStorage : []
   );
-  console.log("test", favoriteCharacters);
+  const favoriteCoStorage = JSON.parse(localStorage.getItem("favoritesCo"));
+  const [favoriteComics, setFavoriteComics] = useState(
+    favoriteCoStorage ? favoriteCoStorage : []
+  );
 
   return (
     <Router>
@@ -30,7 +33,15 @@ function App() {
             />
           }
         />
-        <Route path="/comics/:characterId" element={<ComicsCharacter />} />
+        <Route
+          path="/comics/:characterId"
+          element={
+            <ComicsCharacter
+              favorites={favoriteComics}
+              setFavorites={setFavoriteComics}
+            />
+          }
+        />
         <Route path="/comics" element={<Comics />} />
         <Route
           path="/favorite"
@@ -38,6 +49,8 @@ function App() {
             <Favorite
               favoriteCharacters={favoriteCharacters}
               setFavoriteCharacters={setFavoriteCharacters}
+              favoriteComics={favoriteComics}
+              setFavoriteComics={setFavoriteComics}
             />
           }
         />

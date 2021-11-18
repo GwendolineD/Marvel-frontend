@@ -44,18 +44,7 @@ const Favorite = ({ favoriteCharacters, setFavoriteCharacters }) => {
         )}
       </div>
       <h2>Comics favoris</h2>
-      <div className="container">
-        {/* {favoriteCharacters.map((character, index) => {
-          return (
-            <Character
-              key={character._id}
-              character={character}
-              favorites={favoriteCharacters}
-              setFavorites={setFavoriteCharacters}
-            />
-          );
-        })} */}
-      </div>
+      <div className="container"></div>
     </div>
   );
 };
