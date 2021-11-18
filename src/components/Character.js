@@ -1,32 +1,31 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // import Cookies from "js-cookie";
 
 const Character = ({ character, favorites, setFavorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  useEffect(() => {
-    // const cookieFavorite = Cookies.get("favorites");
-    //     if (cookieFavorite) {
-    //       Cookies.remove("favorite");
-    //       console.log("coocki remove");
-    //     }
-    const addFavorite = () => {
-      if (isFavorite) {
-        const newTab = [...favorites];
-        newTab.push(character);
-        setFavorites(newTab);
-        // Cookies.set("favorites", newTab, { expires: 1, secure: true });
-      }
-      // else {
-      //   const newTab = favorites.filter(
-      //     (favorite) => favorite._id !== character._id
-      //   );
-      //   setFavorites(newTab);
-      // }
-    };
-    addFavorite();
-  }, [isFavorite]);
+  const addFavorite = () => {
+    if (!isFavorite) {
+      // console.log("favorites avant>>>", favorites);
+      const newTab = [...favorites];
+      newTab.push(character._id);
+      // console.log("favorites après>>>", newTab);
+
+      // console.log("stringify>>>", JSON.stringify(newTab));
+      localStorage.setItem("favorites", JSON.stringify(newTab));
+      setFavorites(newTab);
+
+      // si déja dans favoris >>>alert
+    } else {
+      // console.log("favorites delete avant>>>", favorites);
+      const newTab = favorites.filter((favorite) => favorite !== character._id);
+      // console.log("favorites delete après>>>", newTab);
+      localStorage.setItem("favorites", JSON.stringify(newTab));
+      setFavorites(newTab);
+    }
+    setIsFavorite(!isFavorite);
+  };
 
   // const cookieFavorite = Cookies.get("favorites");
   // console.log(cookieFavorite);
@@ -41,13 +40,7 @@ const Character = ({ character, favorites, setFavorites }) => {
         <h2>{character.name}</h2>
         <p>{character.description}</p>
       </Link>
-      <input
-        onChange={() => {
-          setIsFavorite(!isFavorite);
-        }}
-        type="checkbox"
-        checked={isFavorite}
-      />
+      <input onChange={addFavorite} type="checkbox" checked={isFavorite} />
     </div>
   );
 };

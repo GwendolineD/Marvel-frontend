@@ -10,7 +10,11 @@ import Favorite from "./pages/Favorite";
 import ComicsCharacter from "./pages/ComicsCharacter";
 
 function App() {
-  const [favoriteCharacters, setFavoriteCharacters] = useState([]);
+  const favoriteLocalStorage = JSON.parse(localStorage.getItem("favorites"));
+  const [favoriteCharacters, setFavoriteCharacters] = useState(
+    favoriteLocalStorage ? favoriteLocalStorage : []
+  );
+  console.log("test", favoriteCharacters);
 
   return (
     <Router>
