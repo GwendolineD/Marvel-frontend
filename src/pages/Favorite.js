@@ -15,9 +15,13 @@ const Favorite = ({
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await axios.get(`http://localhost:3000/characters`);
-        console.log(response.data.results);
-        setDataCh(response.data.results);
+        const responseCh = await axios.get(`http://localhost:3000/characters`);
+        // console.log(responseCh.data.results);
+        setDataCh(responseCh.data.results);
+
+        const responseCo = await axios.get("http://localhost:3000/comics");
+        // console.log("co", responseCo.data.results);
+        setDataCo(responseCo.data.results);
       };
       fetchData();
     } catch (error) {
@@ -28,7 +32,9 @@ const Favorite = ({
   const selectedCharacters = dataCh.filter((item) =>
     favoriteCharacters.includes(item._id)
   );
-
+  const selectedComics = dataCo.filter((item) =>
+    favoriteComics.includes(item._id)
+  );
   // console.log("selec>>>", selectedComics);
 
   return (
@@ -36,7 +42,7 @@ const Favorite = ({
       <h2>Personnages favoris</h2>
       <div className="container">
         {selectedCharacters.length === 0 ? (
-          <div>Vous n'avez pas encore de personnage favoris</div>
+          <div>Vous n'avez pas encore de comic favoris</div>
         ) : (
           selectedCharacters.map((character, index) => {
             return (
@@ -50,8 +56,24 @@ const Favorite = ({
           })
         )}
       </div>
+
       <h2>Comics favoris</h2>
-      <div className="container"></div>
+      <div className="container">
+        {selectedComics.length === 0 ? (
+          <div>Vous n'avez pas encore de personnage favoris</div>
+        ) : (
+          selectedComics.map((comic, index) => {
+            return (
+              <Character
+                key={comic._id}
+                character={comic}
+                favorites={favoriteComics}
+                setFavorites={setFavoriteComics}
+              />
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
