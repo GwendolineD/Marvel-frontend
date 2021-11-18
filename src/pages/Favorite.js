@@ -3,15 +3,21 @@ import { useEffect, useState } from "react";
 
 import Character from "../components/Character";
 
-const Favorite = ({ favoriteCharacters, setFavoriteCharacters }) => {
-  const [data, setData] = useState([]);
+const Favorite = ({
+  favoriteCharacters,
+  setFavoriteCharacters,
+  favoriteComics,
+  setFavoriteComics,
+}) => {
+  const [dataCh, setDataCh] = useState([]);
+  const [dataCo, setDataCo] = useState([]);
 
   useEffect(() => {
     try {
       const fetchData = async () => {
         const response = await axios.get(`http://localhost:3000/characters`);
         console.log(response.data.results);
-        setData(response.data.results);
+        setDataCh(response.data.results);
       };
       fetchData();
     } catch (error) {
@@ -19,10 +25,11 @@ const Favorite = ({ favoriteCharacters, setFavoriteCharacters }) => {
     }
   }, []);
 
-  const selectedCharacters = data.filter((item) =>
+  const selectedCharacters = dataCh.filter((item) =>
     favoriteCharacters.includes(item._id)
   );
-  console.log("selec>>>", selectedCharacters);
+
+  // console.log("selec>>>", selectedComics);
 
   return (
     <div>

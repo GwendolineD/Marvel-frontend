@@ -33,16 +33,16 @@ function App() {
             />
           }
         />
+        <Route path="/comics/:characterId" element={<ComicsCharacter />} />
         <Route
-          path="/comics/:characterId"
+          path="/comics"
           element={
-            <ComicsCharacter
+            <Comics
               favorites={favoriteComics}
               setFavorites={setFavoriteComics}
             />
           }
         />
-        <Route path="/comics" element={<Comics />} />
         <Route
           path="/favorite"
           element={
