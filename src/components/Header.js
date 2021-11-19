@@ -1,14 +1,48 @@
+import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logoMarvel.png";
+import { useNavigate } from "react-router-dom";
 
-const Header = () => {
-  return (
+const Header = ({ token, setToken, userConnected }) => {
+  console.log("token ", token);
+  const navigate = useNavigate();
+
+  const handleDeconnect = () => {
+    Cookies.remove("username");
+    Cookies.remove("token");
+    setToken("");
+    navigate("/");
+  };
+
+  return token ? (
     <div>
       <div>
-        <img className="logo" src={logo} alt="Logo Marvel" />
-        <Link to="/characters">Personnage</Link>
-        <Link to="comics">Comics</Link>
-        <Link to="favorite">Favoris</Link>
+        <Link to="/">
+          <img className="logo" src={logo} alt="Logo Marvel" />
+        </Link>
+
+        <Link to="/">Personnage</Link>
+        <Link to="/comics">Comics</Link>
+        <Link to="/favorite">Favoris</Link>
+
+        <span>Welcome {userConnected}</span>
+
+        <button onClick={handleDeconnect}>Deconnexion</button>
+      </div>
+    </div>
+  ) : (
+    <div>
+      <div>
+        <Link to="/">
+          <img className="logo" src={logo} alt="Logo Marvel" />
+        </Link>
+
+        <Link to="/">Personnage</Link>
+        <Link to="/comics">Comics</Link>
+        <Link to="/favorite">Favoris</Link>
+
+        <Link to="/signup">Inscription</Link>
+        <Link to="/login">Connexion</Link>
       </div>
     </div>
   );

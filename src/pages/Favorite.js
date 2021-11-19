@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 import Character from "../components/Character";
 
@@ -8,6 +9,7 @@ const Favorite = ({
   setFavoriteCharacters,
   favoriteComics,
   setFavoriteComics,
+  token,
 }) => {
   const [dataCh, setDataCh] = useState([]);
   const [dataCo, setDataCo] = useState([]);
@@ -15,11 +17,17 @@ const Favorite = ({
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const responseCh = await axios.get(`http://localhost:3000/characters`);
+        const responseCh = await axios.get(
+          `https://marvel-backend-gwendoline.herokuapp.com/characters`
+          // `http://localhost:3000/characters`
+        );
         // console.log(responseCh.data.results);
         setDataCh(responseCh.data.results);
 
-        const responseCo = await axios.get("http://localhost:3000/comics");
+        const responseCo = await axios.get(
+          "https://marvel-backend-gwendoline.herokuapp.com/comics"
+          // "http://localhost:3000/comics"
+        );
         // console.log("co", responseCo.data.results);
         setDataCo(responseCo.data.results);
       };
@@ -37,7 +45,7 @@ const Favorite = ({
   );
   // console.log("selec>>>", selectedComics);
 
-  return (
+  return token ? (
     <div>
       <h2>Personnages favoris</h2>
       <div className="container">
@@ -75,6 +83,8 @@ const Favorite = ({
         )}
       </div>
     </div>
+  ) : (
+    <Navigate to="/login" state={{ fromFavorite: true }} />
   );
 };
 

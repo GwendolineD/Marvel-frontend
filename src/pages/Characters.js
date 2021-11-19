@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Character from "../components/Character";
 import Downloading from "../components/Downloading";
+import Pagination from "../components/Pagination";
 
 const Characters = ({ favorites, setFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,9 +16,12 @@ const Characters = ({ favorites, setFavorites }) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `http://localhost:3000/characters?name=${searchName}&limit=${limit}&skip=${
+          `https://marvel-backend-gwendoline.herokuapp.com/characters?name=${searchName}&limit=${limit}&skip=${
             (pageActive - 1) * limit
           }`
+          // `http://localhost:3000/characters?name=${searchName}&limit=${limit}&skip=${
+          //   (pageActive - 1) * limit
+          // }`
         );
         console.log(response.data);
         setDataCharacters(response.data);
@@ -36,27 +40,14 @@ const Characters = ({ favorites, setFavorites }) => {
   ) : (
     <div>
       <div className="container">{dataCharacters.count} resultats</div>
-      <div className="container">
-        <input
-          onChange={(event) => {
-            setLimit(event.target.value);
-          }}
-          type="number"
-          value={limit}
-        />{" "}
-        de comics par page
-      </div>
-      <div className="container">
-        page{" "}
-        <input
-          onChange={(event) => {
-            setPageActive(event.target.value);
-          }}
-          type="number"
-          value={pageActive}
-        />{" "}
-        sur {numberOfPages} pages
-      </div>
+
+      <Pagination
+        pageActive={pageActive}
+        setPageActive={setPageActive}
+        numberOfPages={numberOfPages}
+        limit={limit}
+        setLimit={setLimit}
+      />
       <div className="container">
         <input
           onChange={(event) => {
