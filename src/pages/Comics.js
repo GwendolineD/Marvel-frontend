@@ -5,7 +5,7 @@ import Comic from "../components/Comic";
 import Downloading from "../components/Downloading";
 import Pagination from "../components/Pagination";
 
-const Comics = ({ favorites, setFavorites }) => {
+const Comics = ({ favoritesCo, setFavoritesCo, token }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataComics, setDataComics] = useState({});
   const [searchTitle, setSearchTitle] = useState("");
@@ -66,8 +66,9 @@ const Comics = ({ favorites, setFavorites }) => {
             <Comic
               key={comic._id}
               comic={comic}
-              favorites={favorites}
-              setFavorites={setFavorites}
+              favoritesCo={favoritesCo}
+              setFavoritesCo={setFavoritesCo}
+              token={token}
             />
           );
         })}

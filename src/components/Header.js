@@ -10,6 +10,9 @@ const Header = ({ token, setToken, userConnected }) => {
   const handleDeconnect = () => {
     Cookies.remove("username");
     Cookies.remove("token");
+    Cookies.remove("favoritesCh");
+    Cookies.remove("favoritesCo");
+
     setToken("");
     navigate("/");
   };

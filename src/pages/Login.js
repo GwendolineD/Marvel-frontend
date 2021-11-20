@@ -27,6 +27,19 @@ const Login = ({ setToken, setUserConnected }) => {
         expires: 10,
         secure: true,
       });
+      Cookies.set(
+        "favoritesCh",
+        JSON.stringify(response.data.favoriteCharacters),
+        {
+          expires: 10,
+          secure: true,
+        }
+      );
+      Cookies.set("favoritesCo", JSON.stringify(response.data.favoriteComics), {
+        expires: 10,
+        secure: true,
+      });
+
       setToken(response.data.token);
       setUserConnected(response.data.username);
 

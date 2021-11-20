@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 import Character from "../components/Character";
+import Comic from "../components/Comic";
 
 const Favorite = ({
-  favoriteCharacters,
+  favoritesCh,
   setFavoriteCharacters,
   favoriteComics,
   setFavoriteComics,
@@ -38,7 +39,7 @@ const Favorite = ({
   }, []);
 
   const selectedCharacters = dataCh.filter((item) =>
-    favoriteCharacters.includes(item._id)
+    favoritesCh.includes(item._id)
   );
   const selectedComics = dataCo.filter((item) =>
     favoriteComics.includes(item._id)
@@ -57,7 +58,7 @@ const Favorite = ({
               <Character
                 key={character._id}
                 character={character}
-                favoritesCh={favoriteCharacters}
+                favoritesCh={favoritesCh}
                 setFavoritesCh={setFavoriteCharacters}
               />
             );
@@ -72,11 +73,11 @@ const Favorite = ({
         ) : (
           selectedComics.map((comic, index) => {
             return (
-              <Character
+              <Comic
                 key={comic._id}
-                character={comic}
-                favorites={favoriteComics}
-                setFavorites={setFavoriteComics}
+                comic={comic}
+                favoritesCo={favoriteComics}
+                setFavoritesCo={setFavoriteComics}
               />
             );
           })

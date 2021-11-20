@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -10,20 +11,6 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
       setIsFavorite(true);
     }
   }, [character, favoritesCh]);
-
-  // const addFavorite = () => {
-  //   if (!isFavorite) {
-  //     const newTab = [...favorites];
-  //     newTab.push(character._id);
-  //     localStorage.setItem("favoritesCh", JSON.stringify(newTab));
-  //     setFavorites(newTab);
-  //   } else {
-  //     const newTab = favorites.filter((favorite) => favorite !== character._id);
-  //     localStorage.setItem("favoritesCh", JSON.stringify(newTab));
-  //     setFavorites(newTab);
-  //   }
-  //   setIsFavorite(!isFavorite);
-  // };
 
   const favorite = async () => {
     try {
@@ -44,6 +31,10 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
         );
         console.log("add fav>>>", response.data);
         setFavoritesCh(newTab);
+        Cookies.set("favoritesCh", JSON.stringify(newTab), {
+          expires: 10,
+          secure: true,
+        });
       } else {
         const newTab = favoritesCh.filter(
           (favorite) => favorite !== character._id
@@ -62,20 +53,12 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
         );
         console.log("remove fav>>>", response.data);
         setFavoritesCh(newTab);
+        Cookies.set("favoritesCh", JSON.stringify(newTab), {
+          expires: 10,
+          secure: true,
+        });
       }
 
-      // const response = await axios.post(
-      //   "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
-      //   {
-      //     favoriteCharacters: favoritesCh,
-      //   },
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   }
-      // );
-      // console.log(response.data);
       setIsFavorite(!isFavorite);
     } catch (error) {
       console.log(error.message);
