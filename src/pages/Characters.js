@@ -23,7 +23,6 @@ const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
           //   (pageActive - 1) * limit
           // }`
         );
-        // console.log(response.data);
         setDataCharacters(response.data);
         setIsLoading(false);
       };

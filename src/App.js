@@ -13,25 +13,19 @@ import Cookies from "js-cookie";
 
 function App() {
   const favoriteCh = Cookies.get("favoritesCh");
-  // JSON.parse(Cookies.get("favoritesCh"));
   const [favoriteCharacters, setFavoriteCharacters] = useState(
     favoriteCh ? JSON.parse(Cookies.get("favoritesCh")) : []
   );
 
   const favoriteCo = Cookies.get("favoritesCo");
-  // JSON.parse(Cookies.get("favoritesCo"));
   const [favoriteComics, setFavoriteComics] = useState(
     favoriteCo ? JSON.parse(Cookies.get("favoritesCo")) : []
   );
-  // const userConnected = JSON.parse(Cookies.get("user"));
+
   const [userConnected, setUserConnected] = useState(
     Cookies.get("username") || ""
   );
   const [token, setToken] = useState(Cookies.get("token") || "");
-
-  // console.log("user", user);
-  // const token = user.token;
-  // const username = user.username;
 
   return (
     <Router>

@@ -17,7 +17,6 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
       if (!isFavorite) {
         const newTab = [...favoritesCh];
         newTab.push(character._id);
-        // localStorage.setItem("favoritesCh", JSON.stringify(newTab));
         const response = await axios.post(
           "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
           {
@@ -29,17 +28,19 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
             },
           }
         );
-        console.log("add fav>>>", response.data);
-        setFavoritesCh(newTab);
-        Cookies.set("favoritesCh", JSON.stringify(newTab), {
-          expires: 10,
-          secure: true,
-        });
+        setFavoritesCh(response.data.favoriteCharacters);
+        Cookies.set(
+          "favoritesCh",
+          JSON.stringify(response.data.favoriteCharacters),
+          {
+            expires: 10,
+            secure: true,
+          }
+        );
       } else {
         const newTab = favoritesCh.filter(
           (favorite) => favorite !== character._id
         );
-        // localStorage.setItem("favoritesCh", JSON.stringify(newTab));
         const response = await axios.post(
           "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
           {
@@ -51,12 +52,15 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
             },
           }
         );
-        console.log("remove fav>>>", response.data);
-        setFavoritesCh(newTab);
-        Cookies.set("favoritesCh", JSON.stringify(newTab), {
-          expires: 10,
-          secure: true,
-        });
+        setFavoritesCh(response.data.favoriteCharacters);
+        Cookies.set(
+          "favoritesCh",
+          JSON.stringify(response.data.favoriteCharacters),
+          {
+            expires: 10,
+            secure: true,
+          }
+        );
       }
 
       setIsFavorite(!isFavorite);

@@ -22,14 +22,12 @@ const Favorite = ({
           `https://marvel-backend-gwendoline.herokuapp.com/characters`
           // `http://localhost:3000/characters`
         );
-        // console.log(responseCh.data.results);
         setDataCh(responseCh.data.results);
 
         const responseCo = await axios.get(
           "https://marvel-backend-gwendoline.herokuapp.com/comics"
           // "http://localhost:3000/comics"
         );
-        // console.log("co", responseCo.data.results);
         setDataCo(responseCo.data.results);
       };
       fetchData();
@@ -44,7 +42,6 @@ const Favorite = ({
   const selectedComics = dataCo.filter((item) =>
     favoriteComics.includes(item._id)
   );
-  // console.log("selec>>>", selectedComics);
 
   return token ? (
     <div>
@@ -53,13 +50,14 @@ const Favorite = ({
         {selectedCharacters.length === 0 ? (
           <div>Vous n'avez pas encore de comic favoris</div>
         ) : (
-          selectedCharacters.map((character, index) => {
+          selectedCharacters.map((character) => {
             return (
               <Character
                 key={character._id}
                 character={character}
                 favoritesCh={favoritesCh}
                 setFavoritesCh={setFavoriteCharacters}
+                token={token}
               />
             );
           })
@@ -71,13 +69,14 @@ const Favorite = ({
         {selectedComics.length === 0 ? (
           <div>Vous n'avez pas encore de personnage favoris</div>
         ) : (
-          selectedComics.map((comic, index) => {
+          selectedComics.map((comic) => {
             return (
               <Comic
                 key={comic._id}
                 comic={comic}
                 favoritesCo={favoriteComics}
                 setFavoritesCo={setFavoriteComics}
+                token={token}
               />
             );
           })

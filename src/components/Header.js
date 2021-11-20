@@ -4,7 +4,6 @@ import logo from "../assets/img/logoMarvel.png";
 import { useNavigate } from "react-router-dom";
 
 const Header = ({ token, setToken, userConnected }) => {
-  console.log("token ", token);
   const navigate = useNavigate();
 
   const handleDeconnect = () => {
