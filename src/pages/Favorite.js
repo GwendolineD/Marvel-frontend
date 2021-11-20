@@ -44,7 +44,7 @@ const Favorite = ({
   );
 
   return token ? (
-    <div>
+    <div className="all">
       <h2>Personnages favoris</h2>
       <div className="container">
         {selectedCharacters.length === 0 ? (

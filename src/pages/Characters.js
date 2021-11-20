@@ -37,7 +37,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
   return isLoading ? (
     <Downloading />
   ) : (
-    <div>
+    <div className="all page">
       <div className="container">{dataCharacters.count} resultats</div>
 
       <Pagination

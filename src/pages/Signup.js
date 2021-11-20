@@ -49,7 +49,7 @@ const Signup = ({ setToken, setUserConnected }) => {
   };
 
   return (
-    <div>
+    <div className="all">
       <form onSubmit={handleSubmit}>
         <h2>Nom</h2>
         <input

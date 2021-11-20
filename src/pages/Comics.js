@@ -40,7 +40,7 @@ const Comics = ({ favoritesCo, setFavoritesCo, token }) => {
   return isLoading ? (
     <Downloading />
   ) : (
-    <div>
+    <div className="all">
       <div className="container">{dataComics.count} resultats</div>
       <Pagination
         pageActive={pageActive}

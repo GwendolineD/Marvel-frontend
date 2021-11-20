@@ -1,5 +1,5 @@
 const Downloading = () => {
-  return <div>The page is downloading ...</div>;
+  return <div className="all">The page is downloading ...</div>;
 };
 
 export default Downloading;

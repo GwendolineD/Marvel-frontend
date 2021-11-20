@@ -50,7 +50,7 @@ const Login = ({ setToken, setUserConnected }) => {
   };
 
   return (
-    <div>
+    <div className="all">
       <form onSubmit={handleSubmit}>
         <h2>Email</h2>
         <input
