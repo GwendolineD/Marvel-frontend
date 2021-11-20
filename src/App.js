@@ -12,10 +12,11 @@ import Login from "./pages/Login";
 import Cookies from "js-cookie";
 
 function App() {
-  const favoriteChStorage = JSON.parse(localStorage.getItem("favoritesCh"));
-  const [favoriteCharacters, setFavoriteCharacters] = useState(
-    favoriteChStorage ? favoriteChStorage : []
-  );
+  // const favoriteChStorage = JSON.parse(localStorage.getItem("favoritesCh"));
+  const [favoriteCharacters, setFavoriteCharacters] = useState([]);
+
+  console.log("fav ch in app >>>", favoriteCharacters);
+
   const favoriteCoStorage = JSON.parse(localStorage.getItem("favoritesCo"));
   const [favoriteComics, setFavoriteComics] = useState(
     favoriteCoStorage ? favoriteCoStorage : []
@@ -38,8 +39,9 @@ function App() {
           path="/"
           element={
             <Characters
-              favorites={favoriteCharacters}
-              setFavorites={setFavoriteCharacters}
+              favoritesCh={favoriteCharacters}
+              setFavoritesCh={setFavoriteCharacters}
+              token={token}
             />
           }
         />

@@ -60,7 +60,7 @@ const Login = ({ setToken, setUserConnected }) => {
           name=""
           id=""
         />
-        <input type="submit" value="Inscription" />
+        <input type="submit" value="Connexion" />
       </form>
       <Link to="/login">Tu n'as pas encore de compte ? Inscrit toi !</Link>
     </div>

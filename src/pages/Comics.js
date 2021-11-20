@@ -23,7 +23,7 @@ const Comics = ({ favorites, setFavorites }) => {
           //   (pageActive - 1) * limit
           // }`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setDataComics(response.data);
 
         setIsLoading(false);

@@ -5,7 +5,7 @@ import Character from "../components/Character";
 import Downloading from "../components/Downloading";
 import Pagination from "../components/Pagination";
 
-const Characters = ({ favorites, setFavorites }) => {
+const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataCharacters, setDataCharacters] = useState({});
   const [searchName, setSearchName] = useState("");
@@ -23,7 +23,7 @@ const Characters = ({ favorites, setFavorites }) => {
           //   (pageActive - 1) * limit
           // }`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setDataCharacters(response.data);
         setIsLoading(false);
       };
@@ -65,8 +65,9 @@ const Characters = ({ favorites, setFavorites }) => {
             <Character
               key={character._id}
               character={character}
-              favorites={favorites}
-              setFavorites={setFavorites}
+              favoritesCh={favoritesCh}
+              setFavoritesCh={setFavoritesCh}
+              token={token}
             />
           );
         })}

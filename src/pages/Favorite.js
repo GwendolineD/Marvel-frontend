@@ -57,8 +57,8 @@ const Favorite = ({
               <Character
                 key={character._id}
                 character={character}
-                favorites={favoriteCharacters}
-                setFavorites={setFavoriteCharacters}
+                favoritesCh={favoriteCharacters}
+                setFavoritesCh={setFavoriteCharacters}
               />
             );
           })
