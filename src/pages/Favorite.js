@@ -15,6 +15,7 @@ const Favorite = ({
   const [dataCh, setDataCh] = useState([]);
   const [dataCo, setDataCo] = useState([]);
 
+  //récupération des fiches personnages et comics
   useEffect(() => {
     try {
       const fetchData = async () => {
@@ -36,6 +37,7 @@ const Favorite = ({
     }
   }, []);
 
+  //Garder seulement ceux de la liste des favoris
   const selectedCharacters = dataCh.filter((item) =>
     favoritesCh.includes(item._id)
   );
@@ -48,10 +50,11 @@ const Favorite = ({
       <div className="container favoris">
         <div>
           <h2>Personnages favoris</h2>
+
           <div className="favCh">
             {selectedCharacters.length === 0 ? (
               <div className="noFavorite">
-                Vous n'avez pas encore de comic favoris
+                Vous n'avez pas encore de personneges favoris
               </div>
             ) : (
               selectedCharacters.map((character) => {
@@ -71,9 +74,10 @@ const Favorite = ({
 
         <div>
           <h2>Comics favoris</h2>
+
           <div className="favCo">
             {selectedComics.length === 0 ? (
-              <div>Vous n'avez pas encore de personnage favoris</div>
+              <div>Vous n'avez pas encore de comics favoris</div>
             ) : (
               selectedComics.map((comic) => {
                 return (

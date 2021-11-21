@@ -10,15 +10,18 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
 
   const navigate = useNavigate();
 
+  //garder le logo favoris en mémoire
   useEffect(() => {
     if (favoritesCh.indexOf(character._id) !== -1) {
       setIsFavorite(true);
     }
   }, [character, favoritesCh]);
 
+  // ajouter ou retirer un favoris de la base de données
   const favorite = async () => {
     if (token) {
       try {
+        //ajouter
         if (!isFavorite) {
           const newTab = [...favoritesCh];
           newTab.push(character._id);
@@ -43,6 +46,7 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
             }
           );
         } else {
+          //retirer
           const newTab = favoritesCh.filter(
             (favorite) => favorite !== character._id
           );
@@ -77,9 +81,6 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
     }
   };
 
-  // console.log("character>>>", character);
-  console.log("ch id>>>", character._id);
-
   return (
     <div className="card cardCh">
       <Link to={`/comics/${character._id}`} className="firstElement">
@@ -105,12 +106,6 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
           <FontAwesomeIcon icon="grin-hearts" />
         </button>
       )}
-      {/* <input
-        className="checkFavorite"
-        onChange={favorite}
-        type="checkbox"
-        checked={isFavorite}
-      /> */}
     </div>
   );
 };

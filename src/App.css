@@ -7,10 +7,8 @@
   --police2: "Comic Neue", cursive;
 }
 html {
-  /* font-family: "Marvel", sans-serif; */
   font-family: var(--police2);
 }
-
 a {
   text-decoration: none;
   color: inherit;
@@ -24,7 +22,6 @@ button {
 .container {
   width: 1200px;
   margin: auto;
-  /* border: 1px solid black; */
 }
 .errorMessage {
   color: var(--redMarvel);
@@ -49,22 +46,17 @@ input {
   justify-content: space-between;
 }
 .header .container > div:nth-child(1) {
-  /* border: 1px solid red; */
   flex: 1;
 }
 .header .container > div:nth-child(2) {
-  /* border: 1px solid white; */
-  /* height: 60px; */
   flex: 3;
   font-family: var(--police1);
   font-weight: bold;
   font-size: 20px;
   display: flex;
-  /* align-items: center; */
   justify-content: space-evenly;
 }
 .header .container > div:nth-child(3) {
-  /* border: 1px solid red; */
   flex: 2;
   display: flex;
   justify-content: space-evenly;
@@ -98,6 +90,7 @@ input {
   padding: 5px 15px;
   font-size: 15px;
 }
+
 /* ------------------------------ */
 /* SIGN UP et LOGIN */
 .formPage {
@@ -111,14 +104,9 @@ input {
 }
 .formPage h1 {
   margin-bottom: 50px;
-  /* background-color: var(--lessBlack); */
-  /* width: 100vw; */
-  /* text-align: center; */
   font-family: var(--police1);
   font-weight: bold;
   font-size: 22px;
-  /* line-height: 50px; */
-  /* color: white; */
 }
 .formPage form {
   display: flex;
@@ -131,7 +119,6 @@ input {
 }
 .formPage form input:not(:last-child) {
   width: 300px;
-  /* border: 1px solid var(--redMarvel); */
   border: none;
   border-radius: 50px;
   font-family: var(--police2);
@@ -144,7 +131,6 @@ input {
 .formPage form input:last-child {
   cursor: pointer;
   margin-top: 20px;
-  /* width: 100px; */
   align-self: flex-end;
   border: none;
   background-color: var(--redMarvel);
@@ -162,6 +148,7 @@ input {
 .formPage a:hover {
   border-bottom: 1px solid var(--lessBlack);
 }
+
 /* ------------------------------------- */
 /* DOWNLOADING  */
 .download {
@@ -175,6 +162,7 @@ input {
   font-size: 35px;
   font-family: var(--police1);
 }
+
 /* ---------------------------------------- */
 /* PAGINATION */
 .pagination {
@@ -187,18 +175,13 @@ input {
   color: var(--lessBlack);
 }
 .pagination > div:first-child {
-  /* border: 1px solid white; */
-  /* padding-top: 20px; */
   height: 20px;
   display: flex;
   align-content: flex-end;
 }
 
 .pagination > div:last-child {
-  /* border: 1px solid white; */
   display: flex;
-  /* flex-direction: column; */
-  /* align-content: flex-end; */
 }
 .pagination input[type="number"] {
   background-color: var(--lessBlack);
@@ -218,11 +201,11 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 /* Firefox */
 .pagination input[type="number"] {
   -moz-appearance: textfield;
 }
+
 /* ------------------------------------ */
 /* PERSONNAGES et COMICS */
 .page {
@@ -258,7 +241,6 @@ input::-webkit-inner-spin-button {
 }
 .topPage {
   display: flex;
-  /* border: 1px solid white; */
   justify-content: space-between;
   margin-bottom: 30px;
   padding: 10px 5px;
@@ -286,13 +268,11 @@ input::-webkit-inner-spin-button {
   box-shadow: 0 0 10px var(--redMarvel);
 }
 .card:nth-child(even) {
-  /* border: 2px solid red; */
   margin-left: 20px;
 }
 .card img {
   height: 100%;
   width: 200px;
-  /* flex: 1; */
   object-fit: cover;
   object-position: top left;
   border-radius: 5px 0 0 5px;
@@ -303,8 +283,18 @@ input::-webkit-inner-spin-button {
 .card .firstElement div {
   flex: 2;
   padding: 10px 10px;
-  /* padding-left: 10px; */
   box-sizing: border-box;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.card .firstElement div::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.card .firstElement div {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .card .firstElement div h2 {
   font-size: 18px;
@@ -323,6 +313,7 @@ input::-webkit-inner-spin-button {
   bottom: 10px;
   right: 10px;
 }
+
 /* --------------------------------------- */
 /* COMICS'S CHARACTER */
 .comicsCh {
@@ -365,7 +356,6 @@ input::-webkit-inner-spin-button {
   border-left: 1px solid var(--redMarvel);
   padding-left: 10px;
 }
-
 .favoris h2 {
   font-family: var(--police1);
   font-weight: bold;
@@ -373,7 +363,6 @@ input::-webkit-inner-spin-button {
   margin-bottom: 20px;
 }
 .favoris .card:nth-child(even) {
-  /* border: 2px solid red; */
   margin-left: 0px;
 }
 .isFavorite,

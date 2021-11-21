@@ -13,6 +13,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
   const [limit, setLimit] = useState(100);
   const [pageActive, setPageActive] = useState(1);
 
+  //récupérer tous les personnages
   useEffect(() => {
     try {
       const fetchData = async () => {
@@ -40,6 +41,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
   ) : (
     <div className="page">
       <img src={bandeau} alt="Tous les personnages Marvel" />
+
       <div className="container">
         <div className="topPage">
           <h1>Les personnages</h1>
