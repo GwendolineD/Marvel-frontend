@@ -50,7 +50,7 @@ const Login = ({ setToken, setUserConnected }) => {
   };
 
   return (
-    <div className="all formPage">
+    <div className="formPage">
       <h1>Connexion</h1>
 
       <form onSubmit={handleSubmit}>

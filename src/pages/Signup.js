@@ -49,7 +49,7 @@ const Signup = ({ setToken, setUserConnected }) => {
   };
 
   return (
-    <div className="all formPage">
+    <div className="formPage">
       <h1>Inscription</h1>
       <form onSubmit={handleSubmit}>
         <h2>Nom</h2>

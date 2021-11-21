@@ -18,7 +18,7 @@ const Header = ({ token, setToken, userConnected }) => {
   };
 
   return token ? (
-    <div className="all header">
+    <div className="header">
       <div className="container">
         <div>
           <Link to="/">
@@ -27,9 +27,9 @@ const Header = ({ token, setToken, userConnected }) => {
         </div>
 
         <div className="menu">
-          <Link to="/">Personnage</Link>
+          <Link to="/">Personnages</Link>
           <Link to="/comics">Comics</Link>
-          <Link to="/favorite">Favoris</Link>
+          <Link to="/favorite">Vos favoris</Link>
         </div>
 
         <div>
