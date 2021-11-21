@@ -69,8 +69,11 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
     }
   };
 
+  // console.log("character>>>", character);
+  console.log("ch id>>>", character._id);
+
   return (
-    <div className="card">
+    <div className="card cardCh">
       <Link to={`/comics/${character._id}`} className="firstElement">
         <img
           src={`${character.thumbnail.path}.${character.thumbnail.extension}`}

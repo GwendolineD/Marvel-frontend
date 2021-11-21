@@ -6,16 +6,24 @@ import Downloading from "../components/Downloading";
 import Character from "../components/Character";
 import Comic from "../components/Comic";
 
-const ComicsCharacter = () => {
+const ComicsCharacter = ({
+  favoritesCh,
+  setFavoritesCh,
+  token,
+  favoritesCo,
+  setFavoritesCo,
+}) => {
   const { characterId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
 
+  console.log(characterId);
   useEffect(() => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `http://localhost:3000/comics/${characterId}`
+          `https://marvel-backend-gwendoline.herokuapp.com/comics/${characterId}`
+          // `http://localhost:3000/comics/${characterId}`
         );
 
         console.log(response.data);
@@ -31,14 +39,33 @@ const ComicsCharacter = () => {
   return isLoading ? (
     <Downloading />
   ) : (
-    <div>
+    <div className="comicsCh">
       <div className="container">
-        <Character character={data} />
-      </div>
-      <div className="container">
-        {data.comics.map((comic) => {
-          return <Comic key={comic._id} comic={comic} />;
-        })}
+        <div>
+          <Character
+            character={data}
+            favoritesCh={favoritesCh}
+            setFavoritesCh={setFavoritesCh}
+            token={token}
+          />
+        </div>
+
+        <h1>
+          Comics dans lesquels <span>{data.name}</span> apparait :{" "}
+        </h1>
+        <div className=" cards">
+          {data.comics.map((comic) => {
+            return (
+              <Comic
+                key={comic._id}
+                comic={comic}
+                favoritesCo={favoritesCo}
+                setFavoritesCo={setFavoritesCo}
+                token={token}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

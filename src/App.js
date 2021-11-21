@@ -33,7 +33,13 @@ function App() {
 
   return (
     <Router>
-      <Header token={token} setToken={setToken} userConnected={userConnected} />
+      <Header
+        token={token}
+        setToken={setToken}
+        userConnected={userConnected}
+        setFavoritesCh={setFavoriteCharacters}
+        setFavoritesCo={setFavoriteComics}
+      />
       <Routes>
         <Route
           path="/"
@@ -45,7 +51,18 @@ function App() {
             />
           }
         />
-        <Route path="/comics/:characterId" element={<ComicsCharacter />} />
+        <Route
+          path="/comics/:characterId"
+          element={
+            <ComicsCharacter
+              favoritesCh={favoriteCharacters}
+              setFavoritesCh={setFavoriteCharacters}
+              favoritesCo={favoriteComics}
+              setFavoritesCo={setFavoriteComics}
+              token={token}
+            />
+          }
+        />
         <Route
           path="/comics"
           element={

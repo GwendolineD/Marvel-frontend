@@ -129,7 +129,7 @@ button {
   border: none;
   border-radius: 50px;
   font-family: var(--police2);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   padding: 5px 10px;
   margin-bottom: 30px;
@@ -266,8 +266,8 @@ input::-webkit-inner-spin-button {
 .card {
   display: flex;
   border: 1px solid var(--lessBlack);
-  box-shadow: 0 0 8px var(--lessBlack);
-  height: 200px;
+  box-shadow: 0 0 10px var(--lessBlack);
+  height: 210px;
   width: 590px;
   border-spacing: 10px;
   box-sizing: border-box;
@@ -275,7 +275,7 @@ input::-webkit-inner-spin-button {
   position: relative;
   border-radius: 5px;
 }
-.card:hover {
+.cardCh:hover {
   box-shadow: 0 0 10px var(--redMarvel);
 }
 .card:nth-child(even) {
@@ -288,6 +288,7 @@ input::-webkit-inner-spin-button {
   /* flex: 1; */
   object-fit: cover;
   object-position: top left;
+  border-radius: 5px 0 0 5px;
 }
 .card .firstElement {
   display: flex;
@@ -315,16 +316,53 @@ input::-webkit-inner-spin-button {
   bottom: 10px;
   right: 10px;
 }
+/* --------------------------------------- */
+/* COMICS'S CHARACTER */
+.comicsCh {
+  background-color: black;
+  color: white;
+  padding: 50px 0;
+}
+.comicsCh h1 {
+  font-family: var(--police1);
+  font-size: 20px;
+  text-decoration: underline;
+  color: rgb(112, 111, 111);
+  margin-top: 50px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+.comicsCh span {
+  font-weight: bold;
+}
 
 /* --------------------------------------- */
-/* temporaire */
-/* .page {
-  background-color: var(--lessBlack);
-} */
-
-/* .container {
-  width: 1250px;
-  margin: auto;
+/* FAVORIS */
+.favorisPage {
+  background-color: black;
+  color: white;
+  padding: 40px 0;
+  height: 100vh;
+}
+.favoris {
   display: flex;
-  flex-wrap: wrap;
-} */
+}
+
+.favCh {
+  border-right: 1px solid var(--redMarvel);
+  padding-right: 10px;
+}
+.favoris > div:last-child {
+  /* border: 1px solid red; */
+  padding-left: 10px;
+}
+.favoris h2 {
+  font-family: var(--police1);
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.favoris .card:nth-child(even) {
+  /* border: 2px solid red; */
+  margin-left: 0px;
+}

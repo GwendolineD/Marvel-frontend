@@ -44,43 +44,49 @@ const Favorite = ({
   );
 
   return token ? (
-    <div className="all">
-      <h2>Personnages favoris</h2>
-      <div className="container">
-        {selectedCharacters.length === 0 ? (
-          <div>Vous n'avez pas encore de comic favoris</div>
-        ) : (
-          selectedCharacters.map((character) => {
-            return (
-              <Character
-                key={character._id}
-                character={character}
-                favoritesCh={favoritesCh}
-                setFavoritesCh={setFavoriteCharacters}
-                token={token}
-              />
-            );
-          })
-        )}
-      </div>
+    <div className="favorisPage">
+      <div className="container favoris">
+        <div>
+          <h2>Personnages favoris</h2>
+          <div className="favCh">
+            {selectedCharacters.length === 0 ? (
+              <div>Vous n'avez pas encore de comic favoris</div>
+            ) : (
+              selectedCharacters.map((character) => {
+                return (
+                  <Character
+                    key={character._id}
+                    character={character}
+                    favoritesCh={favoritesCh}
+                    setFavoritesCh={setFavoriteCharacters}
+                    token={token}
+                  />
+                );
+              })
+            )}
+          </div>
+        </div>
 
-      <h2>Comics favoris</h2>
-      <div className="container">
-        {selectedComics.length === 0 ? (
-          <div>Vous n'avez pas encore de personnage favoris</div>
-        ) : (
-          selectedComics.map((comic) => {
-            return (
-              <Comic
-                key={comic._id}
-                comic={comic}
-                favoritesCo={favoriteComics}
-                setFavoritesCo={setFavoriteComics}
-                token={token}
-              />
-            );
-          })
-        )}
+        <div>
+          <h2>Comics favoris</h2>
+          <div>
+            {selectedComics.length === 0 ? (
+              <div>Vous n'avez pas encore de personnage favoris</div>
+            ) : (
+              selectedComics.map((comic) => {
+                return (
+                  <Comic
+                    key={comic._id}
+                    comic={comic}
+                    favoritesCo={favoriteComics}
+                    setFavoritesCo={setFavoriteComics}
+                    token={token}
+                  />
+                );
+              })
+            )}
+          </div>
+        </div>
       </div>
     </div>
   ) : (

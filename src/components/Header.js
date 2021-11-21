@@ -4,7 +4,13 @@ import logo from "../assets/img/logoMarvel.png";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Header = ({ token, setToken, userConnected }) => {
+const Header = ({
+  token,
+  setToken,
+  userConnected,
+  setFavoritesCo,
+  setFavoritesCh,
+}) => {
   const navigate = useNavigate();
 
   const handleDeconnect = () => {
@@ -13,6 +19,8 @@ const Header = ({ token, setToken, userConnected }) => {
     Cookies.remove("favoritesCh");
     Cookies.remove("favoritesCo");
 
+    setFavoritesCh([]);
+    setFavoritesCo([]);
     setToken("");
     navigate("/");
   };
@@ -54,9 +62,9 @@ const Header = ({ token, setToken, userConnected }) => {
         </div>
 
         <div className="menu">
-          <Link to="/">Personnage</Link>
+          <Link to="/">Personnages</Link>
           <Link to="/comics">Comics</Link>
-          <Link to="/favorite">Favoris</Link>
+          <Link to="/favorite">Vos favoris</Link>
         </div>
 
         <div>
