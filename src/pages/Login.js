@@ -7,6 +7,7 @@ import axios from "axios";
 const Login = ({ setToken, setUserConnected }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,9 +44,12 @@ const Login = ({ setToken, setUserConnected }) => {
       setToken(response.data.token);
       setUserConnected(response.data.username);
 
-      navigate(location.state?.fromFavorite ? "/favorite" : "/");
+      navigate(!location.state?.fromFavorite ? "/" : "/favorite");
     } catch (error) {
       console.log(error.message);
+      if (error.response && error.response.status === 401) {
+        setErrorMessage(error.response.data.message);
+      }
     }
   };
 
@@ -61,7 +65,6 @@ const Login = ({ setToken, setUserConnected }) => {
           }}
           type="email"
           value={email}
-          placeholder="Aaron@mail.com"
         />
 
         <h2>Mot de passe</h2>
@@ -71,8 +74,10 @@ const Login = ({ setToken, setUserConnected }) => {
           }}
           type="password"
           value={password}
-          placeholder="************"
         />
+
+        <span className="errorMessage">{errorMessage} </span>
+
         <input type="submit" value="Je me connecte" />
       </form>
       <Link to="/login">Tu n'as pas encore de compte ? Inscrit toi !</Link>

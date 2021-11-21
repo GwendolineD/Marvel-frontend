@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Comic = ({ comic, favoritesCo, setFavoritesCo, token }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -82,12 +83,23 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token }) => {
         </div>
       </div>
 
-      <input
+      {isFavorite ? (
+        <button className="isFavorite checkFavorite" onClick={favorite}>
+          <span>
+            <FontAwesomeIcon icon="grin-hearts" />
+          </span>
+        </button>
+      ) : (
+        <button className="notFavorite checkFavorite" onClick={favorite}>
+          <FontAwesomeIcon icon="grin-hearts" />
+        </button>
+      )}
+      {/* <input
         className="checkFavorite"
         onChange={favorite}
         type="checkbox"
         checked={isFavorite}
-      />
+      /> */}
     </div>
   );
 };

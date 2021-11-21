@@ -50,7 +50,9 @@ const Favorite = ({
           <h2>Personnages favoris</h2>
           <div className="favCh">
             {selectedCharacters.length === 0 ? (
-              <div>Vous n'avez pas encore de comic favoris</div>
+              <div className="noFavorite">
+                Vous n'avez pas encore de comic favoris
+              </div>
             ) : (
               selectedCharacters.map((character) => {
                 return (
@@ -69,7 +71,7 @@ const Favorite = ({
 
         <div>
           <h2>Comics favoris</h2>
-          <div>
+          <div className="favCo">
             {selectedComics.length === 0 ? (
               <div>Vous n'avez pas encore de personnage favoris</div>
             ) : (

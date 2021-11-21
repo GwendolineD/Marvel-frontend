@@ -8,6 +8,7 @@ const Signup = ({ setToken, setUserConnected }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -45,6 +46,9 @@ const Signup = ({ setToken, setUserConnected }) => {
       navigate("/");
     } catch (error) {
       console.log(error.message);
+      if (error.response) {
+        setErrorMessage(error.response.data.message);
+      }
     }
   };
 
@@ -60,7 +64,6 @@ const Signup = ({ setToken, setUserConnected }) => {
           }}
           type="text"
           value={username}
-          placeholder="Aaron"
         />
 
         <h2>Email</h2>
@@ -70,7 +73,6 @@ const Signup = ({ setToken, setUserConnected }) => {
           }}
           type="email"
           value={email}
-          placeholder="Aaron@mail.com"
         />
 
         <h2>Mot de passe</h2>
@@ -79,9 +81,12 @@ const Signup = ({ setToken, setUserConnected }) => {
             setPassword(event.target.value);
           }}
           type="password"
+          required
           value={password}
-          placeholder="************"
         />
+
+        <span className="errorMessage">{errorMessage}</span>
+
         <input type="submit" value="Je m'inscris" />
       </form>
       <Link to="/login">Tu as déjà un compte ? Connecte toi !</Link>

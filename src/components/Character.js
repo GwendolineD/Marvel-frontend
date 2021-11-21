@@ -2,9 +2,13 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (favoritesCh.indexOf(character._id) !== -1) {
@@ -13,59 +17,63 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
   }, [character, favoritesCh]);
 
   const favorite = async () => {
-    try {
-      if (!isFavorite) {
-        const newTab = [...favoritesCh];
-        newTab.push(character._id);
-        const response = await axios.post(
-          "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
-          {
-            favoriteCharacters: newTab,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
+    if (token) {
+      try {
+        if (!isFavorite) {
+          const newTab = [...favoritesCh];
+          newTab.push(character._id);
+          const response = await axios.post(
+            "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
+            {
+              favoriteCharacters: newTab,
             },
-          }
-        );
-        setFavoritesCh(response.data.favoriteCharacters);
-        Cookies.set(
-          "favoritesCh",
-          JSON.stringify(response.data.favoriteCharacters),
-          {
-            expires: 10,
-            secure: true,
-          }
-        );
-      } else {
-        const newTab = favoritesCh.filter(
-          (favorite) => favorite !== character._id
-        );
-        const response = await axios.post(
-          "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
-          {
-            favoriteCharacters: newTab,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setFavoritesCh(response.data.favoriteCharacters);
+          Cookies.set(
+            "favoritesCh",
+            JSON.stringify(response.data.favoriteCharacters),
+            {
+              expires: 10,
+              secure: true,
+            }
+          );
+        } else {
+          const newTab = favoritesCh.filter(
+            (favorite) => favorite !== character._id
+          );
+          const response = await axios.post(
+            "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
+            {
+              favoriteCharacters: newTab,
             },
-          }
-        );
-        setFavoritesCh(response.data.favoriteCharacters);
-        Cookies.set(
-          "favoritesCh",
-          JSON.stringify(response.data.favoriteCharacters),
-          {
-            expires: 10,
-            secure: true,
-          }
-        );
-      }
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setFavoritesCh(response.data.favoriteCharacters);
+          Cookies.set(
+            "favoritesCh",
+            JSON.stringify(response.data.favoriteCharacters),
+            {
+              expires: 10,
+              secure: true,
+            }
+          );
+        }
 
-      setIsFavorite(!isFavorite);
-    } catch (error) {
-      console.log(error.message);
+        setIsFavorite(!isFavorite);
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      navigate("/login");
     }
   };
 
@@ -85,12 +93,24 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
           <p>{character.description}</p>
         </div>
       </Link>
-      <input
+
+      {isFavorite ? (
+        <button className="isFavorite checkFavorite" onClick={favorite}>
+          <span>
+            <FontAwesomeIcon icon="grin-hearts" />
+          </span>
+        </button>
+      ) : (
+        <button className="notFavorite checkFavorite" onClick={favorite}>
+          <FontAwesomeIcon icon="grin-hearts" />
+        </button>
+      )}
+      {/* <input
         className="checkFavorite"
         onChange={favorite}
         type="checkbox"
         checked={isFavorite}
-      />
+      /> */}
     </div>
   );
 };

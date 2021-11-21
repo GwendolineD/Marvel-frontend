@@ -26,6 +26,12 @@ button {
   margin: auto;
   /* border: 1px solid black; */
 }
+.errorMessage {
+  color: var(--redMarvel);
+}
+input {
+  outline: none;
+}
 
 /* ------------------------------------------ */
 /* HEADER */
@@ -154,7 +160,7 @@ button {
   line-height: 16px;
 }
 .formPage a:hover {
-  border-bottom: 1px solid var(--redMarvel);
+  border-bottom: 1px solid var(--lessBlack);
 }
 /* ------------------------------------- */
 /* DOWNLOADING  */
@@ -227,6 +233,7 @@ input::-webkit-inner-spin-button {
 .page > img {
   width: 100vw;
   height: 300px;
+  padding-top: 2px;
   object-fit: cover;
   object-position: top;
 }
@@ -347,15 +354,18 @@ input::-webkit-inner-spin-button {
 .favoris {
   display: flex;
 }
-
+.noFavorite {
+  width: 600px;
+}
 .favCh {
   border-right: 1px solid var(--redMarvel);
   padding-right: 10px;
 }
-.favoris > div:last-child {
-  /* border: 1px solid red; */
+.favCo {
+  border-left: 1px solid var(--redMarvel);
   padding-left: 10px;
 }
+
 .favoris h2 {
   font-family: var(--police1);
   font-weight: bold;
@@ -365,4 +375,16 @@ input::-webkit-inner-spin-button {
 .favoris .card:nth-child(even) {
   /* border: 2px solid red; */
   margin-left: 0px;
+}
+.isFavorite,
+.notFavorite {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  font-size: 20px;
+}
+.isFavorite span {
+  color: var(--redMarvel);
+}
+.notFavorite {
+  color: var(--lessBlack);
 }

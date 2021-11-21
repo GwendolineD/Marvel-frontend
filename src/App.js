@@ -12,8 +12,8 @@ import Login from "./pages/Login";
 import Cookies from "js-cookie";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-library.add(faUser);
+import { faUser, faGrinHearts } from "@fortawesome/free-solid-svg-icons";
+library.add(faUser, faGrinHearts);
 
 function App() {
   const favoriteCh = Cookies.get("favoritesCh");
