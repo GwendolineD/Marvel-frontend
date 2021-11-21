@@ -50,7 +50,9 @@ const Login = ({ setToken, setUserConnected }) => {
   };
 
   return (
-    <div className="all">
+    <div className="all formPage">
+      <h1>Connexion</h1>
+
       <form onSubmit={handleSubmit}>
         <h2>Email</h2>
         <input
@@ -59,8 +61,7 @@ const Login = ({ setToken, setUserConnected }) => {
           }}
           type="email"
           value={email}
-          name=""
-          id=""
+          placeholder="Aaron@mail.com"
         />
 
         <h2>Mot de passe</h2>
@@ -70,10 +71,9 @@ const Login = ({ setToken, setUserConnected }) => {
           }}
           type="password"
           value={password}
-          name=""
-          id=""
+          placeholder="************"
         />
-        <input type="submit" value="Connexion" />
+        <input type="submit" value="Je me connecte" />
       </form>
       <Link to="/login">Tu n'as pas encore de compte ? Inscrit toi !</Link>
     </div>

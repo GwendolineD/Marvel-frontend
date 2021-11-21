@@ -49,17 +49,18 @@ const Signup = ({ setToken, setUserConnected }) => {
   };
 
   return (
-    <div className="all">
+    <div className="all formPage">
+      <h1>Inscription</h1>
       <form onSubmit={handleSubmit}>
         <h2>Nom</h2>
+
         <input
           onChange={(event) => {
             setUsername(event.target.value);
           }}
           type="text"
           value={username}
-          name=""
-          id=""
+          placeholder="Aaron"
         />
 
         <h2>Email</h2>
@@ -69,8 +70,7 @@ const Signup = ({ setToken, setUserConnected }) => {
           }}
           type="email"
           value={email}
-          name=""
-          id=""
+          placeholder="Aaron@mail.com"
         />
 
         <h2>Mot de passe</h2>
@@ -80,10 +80,9 @@ const Signup = ({ setToken, setUserConnected }) => {
           }}
           type="password"
           value={password}
-          name=""
-          id=""
+          placeholder="************"
         />
-        <input type="submit" value="Inscription" />
+        <input type="submit" value="Je m'inscris" />
       </form>
       <Link to="/login">Tu as déjà un compte ? Connecte toi !</Link>
     </div>

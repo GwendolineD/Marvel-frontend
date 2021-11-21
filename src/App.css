@@ -31,6 +31,7 @@ button {
 /* HEADER */
 .header {
   background-color: black;
+  box-shadow: 6px 0 6px var(--redMarvel);
   color: white;
   position: sticky;
   top: 0;
@@ -86,6 +87,83 @@ button {
   border-radius: 5px;
   padding: 5px 15px;
   font-size: 15px;
+}
+/* ------------------------------ */
+/* SIGN UP et LOGIN */
+.formPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  color: white;
+  height: 100vh;
+  padding: 50px 0;
+}
+.formPage h1 {
+  margin-bottom: 50px;
+  /* background-color: var(--lessBlack); */
+  /* width: 100vw; */
+  /* text-align: center; */
+  font-family: var(--police1);
+  font-weight: bold;
+  font-size: 22px;
+  /* line-height: 50px; */
+  /* color: white; */
+}
+.formPage form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.formPage form h2 {
+  font-family: var(--police1);
+  margin: 15px 0;
+}
+.formPage form input:not(:last-child) {
+  width: 300px;
+  /* border: 1px solid var(--redMarvel); */
+  border: none;
+  border-radius: 50px;
+  font-family: var(--police2);
+  font-size: 14px;
+  line-height: 24px;
+  padding: 5px 10px;
+  margin-bottom: 30px;
+  background-color: var(--lessBlack);
+}
+.formPage form input:last-child {
+  cursor: pointer;
+  margin-top: 20px;
+  /* width: 100px; */
+  align-self: flex-end;
+  border: none;
+  background-color: var(--redMarvel);
+  color: white;
+  padding: 7px 12px;
+  font-family: var(--police2);
+  font-size: 14px;
+  border-radius: 15px;
+}
+.formPage a {
+  color: var(--lessBlack);
+  font-size: 14px;
+  line-height: 16px;
+}
+.formPage a:hover {
+  border-bottom: 1px solid var(--redMarvel);
+}
+/* ------------------------------------- */
+/* DOWNLOADING  */
+.download {
+  height: calc(100vh - 200px);
+  padding-bottom: 200px;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  font-family: var(--police1);
 }
 
 /* ------------------------------------ */
