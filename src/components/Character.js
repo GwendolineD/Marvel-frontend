@@ -71,16 +71,23 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
 
   return (
     <div className="card">
-      <Link to={`/comics/${character._id}`}>
+      <Link to={`/comics/${character._id}`} className="firstElement">
         <img
           src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-          alt="personnage"
+          alt={character.name}
         />
 
-        <h2>{character.name}</h2>
-        <p>{character.description}</p>
+        <div>
+          <h2>{character.name}</h2>
+          <p>{character.description}</p>
+        </div>
       </Link>
-      <input onChange={favorite} type="checkbox" checked={isFavorite} />
+      <input
+        className="checkFavorite"
+        onChange={favorite}
+        type="checkbox"
+        checked={isFavorite}
+      />
     </div>
   );
 };

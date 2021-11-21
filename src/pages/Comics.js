@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Comic from "../components/Comic";
 import Downloading from "../components/Downloading";
 import Pagination from "../components/Pagination";
+import bandeau from "../assets/img/marvel-comic.jpg";
 
 const Comics = ({ favoritesCo, setFavoritesCo, token }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,38 +41,43 @@ const Comics = ({ favoritesCo, setFavoritesCo, token }) => {
   return isLoading ? (
     <Downloading />
   ) : (
-    <div className="all">
-      <div className="container">{dataComics.count} resultats</div>
-      <Pagination
-        pageActive={pageActive}
-        setPageActive={setPageActive}
-        numberOfPages={numberOfPages}
-        limit={limit}
-        setLimit={setLimit}
-      />
+    <div className="page">
+      <img src={bandeau} alt="Tous les personnages Marvel" />
+      <div className="container">
+        <div className="topPage">
+          <h1>Les comics</h1>
 
-      <div className="container">
-        <input
-          onChange={(event) => {
-            setSearchTitle(event.target.value);
-          }}
-          type="search"
-          name=""
-          id=""
+          <input
+            onChange={(event) => {
+              setSearchTitle(event.target.value);
+            }}
+            type="search"
+            placeholder="Recherchez votre comic préferé"
+          />
+        </div>
+
+        <Pagination
+          pageActive={pageActive}
+          setPageActive={setPageActive}
+          numberOfPages={numberOfPages}
+          limit={limit}
+          setLimit={setLimit}
+          numberOfResults={dataComics.count}
         />
-      </div>
-      <div className="container">
-        {dataComics.results.map((comic) => {
-          return (
-            <Comic
-              key={comic._id}
-              comic={comic}
-              favoritesCo={favoritesCo}
-              setFavoritesCo={setFavoritesCo}
-              token={token}
-            />
-          );
-        })}
+
+        <div className="cards">
+          {dataComics.results.map((comic) => {
+            return (
+              <Comic
+                key={comic._id}
+                comic={comic}
+                favoritesCo={favoritesCo}
+                setFavoritesCo={setFavoritesCo}
+                token={token}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Character from "../components/Character";
 import Downloading from "../components/Downloading";
 import Pagination from "../components/Pagination";
+import bandeau from "../assets/img/marvel-perso.jpg";
 
 const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,39 +38,43 @@ const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
   return isLoading ? (
     <Downloading />
   ) : (
-    <div className="all page">
-      <div className="container">{dataCharacters.count} resultats</div>
-
-      <Pagination
-        pageActive={pageActive}
-        setPageActive={setPageActive}
-        numberOfPages={numberOfPages}
-        limit={limit}
-        setLimit={setLimit}
-      />
+    <div className="page">
+      <img src={bandeau} alt="Tous les personnages Marvel" />
       <div className="container">
-        <input
-          onChange={(event) => {
-            setSearchName(event.target.value);
-          }}
-          type="search"
-          name=""
-          id=""
+        <div className="topPage">
+          <h1>Les personnages</h1>
+
+          <input
+            onChange={(event) => {
+              setSearchName(event.target.value);
+            }}
+            type="search"
+            placeholder="Recherchez votre personnage préferé"
+          />
+        </div>
+
+        <Pagination
+          pageActive={pageActive}
+          setPageActive={setPageActive}
+          numberOfPages={numberOfPages}
+          limit={limit}
+          setLimit={setLimit}
+          numberOfResults={dataCharacters.count}
         />
-      </div>
 
-      <div className="container">
-        {dataCharacters.results.map((character) => {
-          return (
-            <Character
-              key={character._id}
-              character={character}
-              favoritesCh={favoritesCh}
-              setFavoritesCh={setFavoritesCh}
-              token={token}
-            />
-          );
-        })}
+        <div className="cards">
+          {dataCharacters.results.map((character) => {
+            return (
+              <Character
+                key={character._id}
+                character={character}
+                favoritesCh={favoritesCh}
+                setFavoritesCh={setFavoritesCh}
+                token={token}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

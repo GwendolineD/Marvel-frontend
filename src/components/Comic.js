@@ -70,13 +70,24 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token }) => {
 
   return (
     <div className="card">
-      <img
-        src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-        alt="comic Marvel"
+      <div className="firstElement">
+        <img
+          src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+          alt="comic Marvel"
+        />
+
+        <div>
+          <h2>{comic.title}</h2>
+          <p>{comic.description}</p>
+        </div>
+      </div>
+
+      <input
+        className="checkFavorite"
+        onChange={favorite}
+        type="checkbox"
+        checked={isFavorite}
       />
-      <h2>{comic.title}</h2>
-      <p>{comic.description}</p>
-      <input onChange={favorite} type="checkbox" checked={isFavorite} />
     </div>
   );
 };
