@@ -1,8 +1,9 @@
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
-import logo from "../assets/img/logoMarvel.png";
-import { useNavigate } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import logo from "../assets/img/logoMarvel.png";
 
 const Header = ({
   token,
@@ -12,6 +13,7 @@ const Header = ({
   setFavoritesCh,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDeconnect = () => {
     Cookies.remove("username");
@@ -21,12 +23,14 @@ const Header = ({
 
     setFavoritesCh([]);
     setFavoritesCo([]);
+
     setToken("");
+
     navigate("/");
   };
 
   return token ? (
-    <div className="header">
+    <header>
       <div className="container">
         <div>
           <Link to="/">
@@ -35,9 +39,21 @@ const Header = ({
         </div>
 
         <div className="menu">
-          <Link to="/">Personnages</Link>
-          <Link to="/comics">Comics</Link>
-          <Link to="/favorite">Vos favoris</Link>
+          <Link to="/" className={location.pathname === "/" ? "white" : "grey"}>
+            Personnages
+          </Link>
+          <Link
+            to="/comics"
+            className={location.pathname === "/comics" ? "white" : "grey"}
+          >
+            Comics
+          </Link>
+          <Link
+            to="/favorite"
+            className={location.pathname === "/favorite" ? "white" : "grey"}
+          >
+            Vos favoris
+          </Link>
         </div>
 
         <div>
@@ -45,15 +61,16 @@ const Header = ({
             <span>
               <FontAwesomeIcon icon="user" />
             </span>
+
             <p>Welcome {userConnected} !</p>
           </div>
 
           <button onClick={handleDeconnect}>Deconnexion</button>
         </div>
       </div>
-    </div>
+    </header>
   ) : (
-    <div className="all  header">
+    <header className="all">
       <div className="container">
         <div>
           <Link to="/">
@@ -62,9 +79,21 @@ const Header = ({
         </div>
 
         <div className="menu">
-          <Link to="/">Personnages</Link>
-          <Link to="/comics">Comics</Link>
-          <Link to="/favorite">Vos favoris</Link>
+          <Link to="/" className={location.pathname === "/" ? "white" : "grey"}>
+            Personnages
+          </Link>
+          <Link
+            to="/comics"
+            className={location.pathname === "/comics" ? "white" : "grey"}
+          >
+            Comics
+          </Link>
+          <Link
+            to="/favorite"
+            className={location.pathname === "/favorite" ? "white" : "grey"}
+          >
+            Vos favoris
+          </Link>
         </div>
 
         <div>
@@ -72,7 +101,7 @@ const Header = ({
           <Link to="/login">Connexion</Link>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

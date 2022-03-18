@@ -10,6 +10,7 @@ import ComicsCharacter from "./pages/ComicsCharacter";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Cookies from "js-cookie";
+import Footer from "./components/Footer";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faGrinHearts } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +32,9 @@ function App() {
   );
   const [token, setToken] = useState(Cookies.get("token") || "");
 
+  // const baseUrl = "https://marvel-backend-gwendoline.herokuapp.com";
+  const baseUrl = "http://localhost:3001";
+
   return (
     <Router>
       <Header
@@ -48,6 +52,7 @@ function App() {
               favoritesCh={favoriteCharacters}
               setFavoritesCh={setFavoriteCharacters}
               token={token}
+              baseUrl={baseUrl}
             />
           }
         />
@@ -60,6 +65,7 @@ function App() {
               favoritesCo={favoriteComics}
               setFavoritesCo={setFavoriteComics}
               token={token}
+              baseUrl={baseUrl}
             />
           }
         />
@@ -70,6 +76,7 @@ function App() {
               favoritesCo={favoriteComics}
               setFavoritesCo={setFavoriteComics}
               token={token}
+              baseUrl={baseUrl}
             />
           }
         />
@@ -82,22 +89,33 @@ function App() {
               favoriteComics={favoriteComics}
               setFavoriteComics={setFavoriteComics}
               token={token}
+              baseUrl={baseUrl}
             />
           }
         />
         <Route
           path="/signup"
           element={
-            <Signup setToken={setToken} setUserConnected={setUserConnected} />
+            <Signup
+              setToken={setToken}
+              setUserConnected={setUserConnected}
+              baseUrl={baseUrl}
+            />
           }
         />
         <Route
           path="/login"
           element={
-            <Login setToken={setToken} setUserConnected={setUserConnected} />
+            <Login
+              setToken={setToken}
+              setUserConnected={setUserConnected}
+              baseUrl={baseUrl}
+            />
           }
         />
       </Routes>
+
+      <Footer />
     </Router>
   );
 }

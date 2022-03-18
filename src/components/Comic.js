@@ -1,33 +1,33 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Comic = ({ comic, favoritesCo, setFavoritesCo, token }) => {
+const Comic = ({ comic, favoritesCo, setFavoritesCo, token, baseUrl }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const navigate = useNavigate();
 
-  //garder le logo favoris en mémoire
+  //keep favorite in memory
   useEffect(() => {
     if (favoritesCo.indexOf(comic._id) !== -1) {
       setIsFavorite(true);
     }
   }, [comic, favoritesCo]);
 
-  // ajouter ou retirer un favoris de la base de données
+  // Add or remove favorites from the database
   const favorite = async () => {
     if (token) {
       try {
         if (!isFavorite) {
-          //ajouter
+          //add
           const newTab = [...favoritesCo];
           newTab.push(comic._id);
 
           const response = await axios.post(
-            "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
+            `${baseUrl}/changeFavorite`,
             {
               favoriteComics: newTab,
             },
@@ -47,13 +47,13 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token }) => {
             }
           );
         } else {
-          //retirer
+          //remove
           const newTab = favoritesCo.filter(
             (favorite) => favorite !== comic._id
           );
 
           const response = await axios.post(
-            "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
+            `${baseUrl}/changeFavorite`,
             {
               favoriteComics: newTab,
             },
@@ -63,6 +63,7 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token }) => {
               },
             }
           );
+
           setFavoritesCo(response.data.favoriteComics);
           Cookies.set(
             "favoritesCo",
@@ -76,7 +77,7 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token }) => {
 
         setIsFavorite(!isFavorite);
       } catch (error) {
-        console.log(error.message);
+        console.log("catch comic component>>>>", error.response);
       }
     } else {
       navigate("/login");

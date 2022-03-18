@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
 
 import Character from "../components/Character";
 import Comic from "../components/Comic";
@@ -11,33 +11,28 @@ const Favorite = ({
   favoriteComics,
   setFavoriteComics,
   token,
+  baseUrl,
 }) => {
   const [dataCh, setDataCh] = useState([]);
   const [dataCo, setDataCo] = useState([]);
 
-  //récupération des fiches personnages et comics
+  //Get all comics and characters
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const responseCh = await axios.get(
-          `https://marvel-backend-gwendoline.herokuapp.com/characters`
-          // `http://localhost:3000/characters`
-        );
+        const responseCh = await axios.get(`${baseUrl}/characters`);
         setDataCh(responseCh.data.results);
 
-        const responseCo = await axios.get(
-          "https://marvel-backend-gwendoline.herokuapp.com/comics"
-          // "http://localhost:3000/comics"
-        );
+        const responseCo = await axios.get(`${baseUrl}/comics`);
         setDataCo(responseCo.data.results);
       };
       fetchData();
     } catch (error) {
-      console.log(error.message);
+      console.log("catch favorites>>>>>>", error.response);
     }
-  }, []);
+  }, [baseUrl]);
 
-  //Garder seulement ceux de la liste des favoris
+  //Filters and keep only the favorites
   const selectedCharacters = dataCh.filter((item) =>
     favoritesCh.includes(item._id)
   );
@@ -87,6 +82,7 @@ const Favorite = ({
                     favoritesCo={favoriteComics}
                     setFavoritesCo={setFavoriteComics}
                     token={token}
+                    baseUrl={baseUrl}
                   />
                 );
               })

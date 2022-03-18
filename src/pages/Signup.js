@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Signup = ({ setToken, setUserConnected }) => {
+const Signup = ({ setToken, setUserConnected, baseUrl }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,21 +13,26 @@ const Signup = ({ setToken, setUserConnected }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        "https://marvel-backend-gwendoline.herokuapp.com/signup",
-        {
-          username: username,
-          email: email,
-          password: password,
-        }
-      );
 
+    try {
+      const response = await axios.post(`${baseUrl}/signup`, {
+        username: username,
+        email: email,
+        password: password,
+      });
+
+      // Store the token
       Cookies.set("token", response.data.token, { expires: 10, secure: true });
+      setToken(response.data.token);
+
+      // Store user infos
       Cookies.set("username", response.data.username, {
         expires: 10,
         secure: true,
       });
+      setUserConnected(response.data.username);
+
+      // Store favorites
       Cookies.set(
         "favoritesCh",
         JSON.stringify(response.data.favoriteCharacters),
@@ -41,11 +45,10 @@ const Signup = ({ setToken, setUserConnected }) => {
         expires: 10,
         secure: true,
       });
-      setToken(response.data.token);
-      setUserConnected(response.data.username);
+
       navigate("/");
     } catch (error) {
-      console.log(error.message);
+      console.log("catch signUp>>>>>>", error.response);
       if (error.response) {
         setErrorMessage(error.response.data.message);
       }
@@ -55,6 +58,7 @@ const Signup = ({ setToken, setUserConnected }) => {
   return (
     <div className="formPage">
       <h1>Inscription</h1>
+
       <form onSubmit={handleSubmit}>
         <h2>Nom</h2>
 
@@ -89,6 +93,7 @@ const Signup = ({ setToken, setUserConnected }) => {
 
         <input type="submit" value="Je m'inscris" />
       </form>
+
       <Link to="/login">Tu as déjà un compte ? Connecte toi !</Link>
     </div>
   );

@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 import Downloading from "../components/Downloading";
 import Character from "../components/Character";
@@ -12,29 +12,27 @@ const ComicsCharacter = ({
   token,
   favoritesCo,
   setFavoritesCo,
+  baseUrl,
 }) => {
   const { characterId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
 
-  console.log(characterId);
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await axios.get(
-          `https://marvel-backend-gwendoline.herokuapp.com/comics/${characterId}`
-          // `http://localhost:3000/comics/${characterId}`
-        );
+        const response = await axios.get(`${baseUrl}/comics/${characterId}`);
 
-        console.log(response.data);
+        // console.log(response.data);
+
         setData(response.data);
-        setIsLoading(false);
       };
       fetchData();
     } catch (error) {
-      console.log(error.message);
+      console.log("catch comics characters>>>>>>", error.response);
     }
-  }, [characterId]);
+    setIsLoading(false);
+  }, [characterId, baseUrl]);
 
   return isLoading ? (
     <Downloading />
@@ -53,6 +51,7 @@ const ComicsCharacter = ({
         <h1>
           Comics dans lesquels <span>{data.name}</span> apparait :{" "}
         </h1>
+
         <div className=" cards">
           {data.comics.map((comic) => {
             return (

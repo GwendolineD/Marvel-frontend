@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import Cookies from "js-cookie";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
-const Login = ({ setToken, setUserConnected }) => {
+const Login = ({ setToken, setUserConnected, baseUrl }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -14,20 +13,25 @@ const Login = ({ setToken, setUserConnected }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        "https://marvel-backend-gwendoline.herokuapp.com/login",
-        {
-          email: email,
-          password: password,
-        }
-      );
 
+    try {
+      const response = await axios.post(`${baseUrl}/login`, {
+        email: email,
+        password: password,
+      });
+
+      // Store token
       Cookies.set("token", response.data.token, { expires: 10, secure: true });
+      setToken(response.data.token);
+
+      // Store user inofs
       Cookies.set("username", response.data.username, {
         expires: 10,
         secure: true,
       });
+      setUserConnected(response.data.username);
+
+      // Store favorites
       Cookies.set(
         "favoritesCh",
         JSON.stringify(response.data.favoriteCharacters),
@@ -41,12 +45,9 @@ const Login = ({ setToken, setUserConnected }) => {
         secure: true,
       });
 
-      setToken(response.data.token);
-      setUserConnected(response.data.username);
-
       navigate(!location.state?.fromFavorite ? "/" : "/favorite");
     } catch (error) {
-      console.log(error.message);
+      console.log("catch logIn>>>>>>", error.response);
       if (error.response && error.response.status === 401) {
         setErrorMessage(error.response.data.message);
       }
@@ -80,7 +81,8 @@ const Login = ({ setToken, setUserConnected }) => {
 
         <input type="submit" value="Je me connecte" />
       </form>
-      <Link to="/login">Tu n'as pas encore de compte ? Inscrit toi !</Link>
+
+      <Link to="/signup">Tu n'as pas encore de compte ? Inscrit toi !</Link>
     </div>
   );
 };

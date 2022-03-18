@@ -1,7 +1,7 @@
 /* GENERAL */
 :root {
   --redMarvel: #f0141e;
-  --lessBlack: #202020;
+  --lessBlack: #4e4d4d;
 
   --police1: "Roboto", sans-serif;
   --police2: "Comic Neue", cursive;
@@ -32,7 +32,9 @@ input {
 
 /* ------------------------------------------ */
 /* HEADER */
-.header {
+/* ------------------------------------------ */
+
+header {
   background-color: black;
   box-shadow: 6px 0 6px var(--redMarvel);
   color: white;
@@ -40,15 +42,21 @@ input {
   z-index: 1000;
   top: 0;
 }
-.header .container {
+.white {
+  color: white;
+}
+.grey {
+  color: var(--lessBlack);
+}
+header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.header .container > div:nth-child(1) {
+header .container > div:nth-child(1) {
   flex: 1;
 }
-.header .container > div:nth-child(2) {
+header .container > div:nth-child(2) {
   flex: 3;
   font-family: var(--police1);
   font-weight: bold;
@@ -56,7 +64,7 @@ input {
   display: flex;
   justify-content: space-evenly;
 }
-.header .container > div:nth-child(3) {
+header .container > div:nth-child(3) {
   flex: 2;
   display: flex;
   justify-content: space-evenly;
@@ -65,26 +73,26 @@ input {
 .logo {
   height: 100px;
 }
-.header .container > div:nth-child(3) div {
+header .container > div:nth-child(3) div {
   font-size: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.header .container > div:nth-child(3) div span {
+header .container > div:nth-child(3) div span {
   font-size: 35px;
   color: var(--redMarvel);
   margin-bottom: 10px;
 }
-.header button {
+header button {
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
   color: white;
   background-color: var(--redMarvel);
 }
-.header .container > div:nth-child(3) a {
+header .container > div:nth-child(3) a {
   border: 1px solid var(--redMarvel);
   border-radius: 5px;
   padding: 5px 15px;
@@ -93,13 +101,15 @@ input {
 
 /* ------------------------------ */
 /* SIGN UP et LOGIN */
+/* ------------------------------------------ */
+
 .formPage {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: black;
   color: white;
-  height: 100vh;
+  height: calc(100vh - 200px);
   padding: 50px 0;
 }
 .formPage h1 {
@@ -151,6 +161,8 @@ input {
 
 /* ------------------------------------- */
 /* DOWNLOADING  */
+/* ------------------------------------------ */
+
 .download {
   height: calc(100vh - 200px);
   padding-bottom: 200px;
@@ -165,6 +177,8 @@ input {
 
 /* ---------------------------------------- */
 /* PAGINATION */
+/* ------------------------------------------ */
+
 .pagination {
   display: flex;
   justify-content: space-between;
@@ -179,7 +193,6 @@ input {
   display: flex;
   align-content: flex-end;
 }
-
 .pagination > div:last-child {
   display: flex;
 }
@@ -208,6 +221,8 @@ input::-webkit-inner-spin-button {
 
 /* ------------------------------------ */
 /* PERSONNAGES et COMICS */
+/* ------------------------------------------ */
+
 .page {
   background-color: black;
   padding-top: px;
@@ -251,7 +266,9 @@ input::-webkit-inner-spin-button {
 }
 
 /* -------------------------------------- */
-/* FICHE CHARACTER et COMIC */
+/* CHARACTER's and COMIC's CARD */
+/* ------------------------------------------ */
+
 .card {
   display: flex;
   border: 1px solid var(--lessBlack);
@@ -316,6 +333,8 @@ input::-webkit-inner-spin-button {
 
 /* --------------------------------------- */
 /* COMICS'S CHARACTER */
+/* --------------------------------------- */
+
 .comicsCh {
   background-color: black;
   color: white;
@@ -336,11 +355,13 @@ input::-webkit-inner-spin-button {
 
 /* --------------------------------------- */
 /* FAVORIS */
+/* --------------------------------------- */
+
 .favorisPage {
   background-color: black;
   color: white;
   padding: 40px 0;
-  height: 100vh;
+  min-height: calc(100vh - 200px);
 }
 .favoris {
   display: flex;
@@ -376,4 +397,21 @@ input::-webkit-inner-spin-button {
 }
 .notFavorite {
   color: var(--lessBlack);
+}
+
+/* --------------------------------------- */
+/* FOOTER */
+/* --------------------------------------- */
+footer {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--lessBlack);
+  background-color: black;
+  border-top: 0.5px var(--lessBlack) solid;
+}
+footer a {
+  font-weight: bold;
+  color: rgb(161, 159, 159);
 }

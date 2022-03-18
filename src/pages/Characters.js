@@ -1,38 +1,36 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 import Character from "../components/Character";
 import Downloading from "../components/Downloading";
 import Pagination from "../components/Pagination";
 import bandeau from "../assets/img/marvel-perso.jpg";
 
-const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
+const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataCharacters, setDataCharacters] = useState({});
   const [searchName, setSearchName] = useState("");
   const [limit, setLimit] = useState(100);
   const [pageActive, setPageActive] = useState(1);
 
-  //récupérer tous les personnages
   useEffect(() => {
-    try {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
         const response = await axios.get(
-          `https://marvel-backend-gwendoline.herokuapp.com/characters?name=${searchName}&limit=${limit}&skip=${
+          `${baseUrl}/characters?name=${searchName}&limit=${limit}&skip=${
             (pageActive - 1) * limit
           }`
-          // `http://localhost:3000/characters?name=${searchName}&limit=${limit}&skip=${
-          //   (pageActive - 1) * limit
-          // }`
         );
+
         setDataCharacters(response.data);
-        setIsLoading(false);
-      };
-      fetchData();
-    } catch (error) {
-      console.log(error.message);
-    }
-  }, [searchName, limit, pageActive]);
+      } catch (error) {
+        console.log("catch characters>>>>>>", error.response);
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [searchName, limit, pageActive, baseUrl]);
 
   const numberOfPages = Math.ceil(dataCharacters.count / limit);
 
@@ -73,6 +71,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token }) => {
                 favoritesCh={favoritesCh}
                 setFavoritesCh={setFavoritesCh}
                 token={token}
+                baseUrl={baseUrl}
               />
             );
           })}

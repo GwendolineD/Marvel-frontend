@@ -1,12 +1,12 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import Comic from "../components/Comic";
 import Downloading from "../components/Downloading";
 import Pagination from "../components/Pagination";
 import bandeau from "../assets/img/marvel-comic.jpg";
 
-const Comics = ({ favoritesCo, setFavoritesCo, token }) => {
+const Comics = ({ favoritesCo, setFavoritesCo, token, baseUrl }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataComics, setDataComics] = useState({});
   const [searchTitle, setSearchTitle] = useState("");
@@ -17,32 +17,30 @@ const Comics = ({ favoritesCo, setFavoritesCo, token }) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `https://marvel-backend-gwendoline.herokuapp.com/comics?title=${searchTitle}&limit=${limit}&skip=${
+          `${baseUrl}/comics?title=${searchTitle}&limit=${limit}&skip=${
             (pageActive - 1) * limit
           }`
-          // `http://localhost:3000/comics?title=${searchTitle}&limit=${limit}&skip=${
-          //   (pageActive - 1) * limit
-          // }`
         );
-        // console.log(response.data.favoriteComics);
-        setDataComics(response.data);
 
-        setIsLoading(false);
+        // console.log(response.data.favoriteComics);
+
+        setDataComics(response.data);
       };
       fetchData();
     } catch (error) {
-      console.log(error.message);
+      console.log("catch comics>>>>>>", error.response);
     }
-  }, [searchTitle, limit, pageActive]);
+    setIsLoading(false);
+  }, [searchTitle, limit, pageActive, baseUrl]);
 
   const numberOfPages = Math.ceil(dataComics.count / limit);
-  // console.log("numberOfPages>>>", numberOfPages);
 
   return isLoading ? (
     <Downloading />
   ) : (
     <div className="page">
       <img src={bandeau} alt="Tous les personnages Marvel" />
+
       <div className="container">
         <div className="topPage">
           <h1>Les comics</h1>

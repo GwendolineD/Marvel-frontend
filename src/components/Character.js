@@ -5,28 +5,34 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
+const Character = ({
+  character,
+  favoritesCh,
+  setFavoritesCh,
+  token,
+  baseUrl,
+}) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const navigate = useNavigate();
 
-  //garder le logo favoris en mémoire
+  //keep favorite in memory
   useEffect(() => {
     if (favoritesCh.indexOf(character._id) !== -1) {
       setIsFavorite(true);
     }
   }, [character, favoritesCh]);
 
-  // ajouter ou retirer un favoris de la base de données
+  // Add or remove favorites from the database
   const favorite = async () => {
     if (token) {
       try {
-        //ajouter
+        //add
         if (!isFavorite) {
           const newTab = [...favoritesCh];
           newTab.push(character._id);
           const response = await axios.post(
-            "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
+            `${baseUrl}/changeFavorite`,
             {
               favoriteCharacters: newTab,
             },
@@ -46,12 +52,12 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
             }
           );
         } else {
-          //retirer
+          //remove
           const newTab = favoritesCh.filter(
             (favorite) => favorite !== character._id
           );
           const response = await axios.post(
-            "https://marvel-backend-gwendoline.herokuapp.com/changeFavorite",
+            `${baseUrl}/changeFavorite`,
             {
               favoriteCharacters: newTab,
             },
@@ -74,7 +80,7 @@ const Character = ({ character, favoritesCh, setFavoritesCh, token }) => {
 
         setIsFavorite(!isFavorite);
       } catch (error) {
-        console.log(error.message);
+        console.log("catch character component>>>>", error.response);
       }
     } else {
       navigate("/login");
