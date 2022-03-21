@@ -3,7 +3,12 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Signup = ({ setToken, setUserConnected, baseUrl }) => {
+const Signup = ({
+  setToken,
+  setUserConnected,
+  baseUrl,
+  handleConnectDisconnect,
+}) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,36 +20,48 @@ const Signup = ({ setToken, setUserConnected, baseUrl }) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${baseUrl}/signup`, {
+      const { data } = await axios.post(`${baseUrl}/signup`, {
         username: username,
         email: email,
         password: password,
       });
 
-      // Store the token
-      Cookies.set("token", response.data.token, { expires: 10, secure: true });
-      setToken(response.data.token);
+      console.log("data>>>", data);
 
-      // Store user infos
-      Cookies.set("username", response.data.username, {
-        expires: 10,
-        secure: true,
-      });
-      setUserConnected(response.data.username);
-
-      // Store favorites
-      Cookies.set(
-        "favoritesCh",
-        JSON.stringify(response.data.favoriteCharacters),
+      handleConnectDisconnect(
+        data.token,
         {
-          expires: 10,
-          secure: true,
-        }
+          username: data.username,
+          avatar: data.avatar,
+        },
+        data.favoriteCharacters,
+        data.favoriteComics
       );
-      Cookies.set("favoritesCo", JSON.stringify(response.data.favoriteComics), {
-        expires: 10,
-        secure: true,
-      });
+
+      // // Store the token
+      // Cookies.set("token", response.data.token, { expires: 10, secure: true });
+      // setToken(response.data.token);
+
+      // // Store user infos
+      // Cookies.set("username", response.data.username, {
+      //   expires: 10,
+      //   secure: true,
+      // });
+      // setUserConnected(response.data.username);
+
+      // // Store favorites
+      // Cookies.set(
+      //   "favoritesCh",
+      //   JSON.stringify(response.data.favoriteCharacters),
+      //   {
+      //     expires: 10,
+      //     secure: true,
+      //   }
+      // );
+      // Cookies.set("favoritesCo", JSON.stringify(response.data.favoriteComics), {
+      //   expires: 10,
+      //   secure: true,
+      // });
 
       navigate("/");
     } catch (error) {

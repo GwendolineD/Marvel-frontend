@@ -29,6 +29,16 @@ button {
 input {
   outline: none;
 }
+.white {
+  color: white;
+}
+.grey {
+  color: var(--lessBlack);
+}
+.bold {
+  font-weight: bold;
+  color: #797676;
+}
 
 /* ------------------------------------------ */
 /* HEADER */
@@ -98,6 +108,13 @@ header .container > div:nth-child(3) a {
   padding: 5px 15px;
   font-size: 15px;
 }
+.avatar {
+  /* border: 1px solid var(--redMarvel); */
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
 
 /* ------------------------------ */
 /* SIGN UP et LOGIN */
@@ -158,7 +175,9 @@ header .container > div:nth-child(3) a {
 .formPage a:hover {
   border-bottom: 1px solid var(--lessBlack);
 }
-
+.hidden {
+  display: none;
+}
 /* ------------------------------------- */
 /* DOWNLOADING  */
 /* ------------------------------------------ */
@@ -217,6 +236,21 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 .pagination input[type="number"] {
   -moz-appearance: textfield;
+}
+.perPage {
+  display: flex;
+  gap: 5px;
+}
+.perPage p:nth-child(odd) {
+  cursor: pointer;
+}
+.paginationContainer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  color: var(--lessBlack);
+  cursor: pointer;
 }
 
 /* ------------------------------------ */

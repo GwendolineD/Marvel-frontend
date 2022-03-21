@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 import Character from "../components/Character";
 import Downloading from "../components/Downloading";
@@ -10,7 +11,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataCharacters, setDataCharacters] = useState({});
   const [searchName, setSearchName] = useState("");
-  const [limit, setLimit] = useState(100);
+  const [limit, setLimit] = useState(20);
   const [pageActive, setPageActive] = useState(1);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
             (pageActive - 1) * limit
           }`
         );
-
+        console.log(response.data);
         setDataCharacters(response.data);
       } catch (error) {
         console.log("catch characters>>>>>>", error.response);
@@ -46,6 +47,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
 
           <input
             onChange={(event) => {
+              setPageActive(1);
               setSearchName(event.target.value);
             }}
             type="search"
@@ -76,6 +78,22 @@ const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
             );
           })}
         </div>
+
+        <ReactPaginate
+          breakLabel="..."
+          onPageChange={(event) => {
+            setPageActive(event.selected + 1);
+          }}
+          pageRangeDisplayed={6}
+          pageCount={numberOfPages}
+          forcePage={pageActive - 1}
+          nextLabel=" >"
+          previousLabel="< "
+          nextClassName={pageActive === numberOfPages ? "hidden" : undefined}
+          previousClassName={pageActive === 1 ? "hidden" : undefined}
+          activeClassName="bold"
+          containerClassName="paginationContainer"
+        />
       </div>
     </div>
   );

@@ -3,7 +3,12 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const Login = ({ setToken, setUserConnected, baseUrl }) => {
+const Login = ({
+  setToken,
+  setUserConnected,
+  baseUrl,
+  handleConnectDisconnect,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,35 +20,47 @@ const Login = ({ setToken, setUserConnected, baseUrl }) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${baseUrl}/login`, {
+      const { data } = await axios.post(`${baseUrl}/login`, {
         email: email,
         password: password,
       });
 
-      // Store token
-      Cookies.set("token", response.data.token, { expires: 10, secure: true });
-      setToken(response.data.token);
+      console.log("data>>>>", data);
 
-      // Store user inofs
-      Cookies.set("username", response.data.username, {
-        expires: 10,
-        secure: true,
-      });
-      setUserConnected(response.data.username);
+      // // Store token
+      // Cookies.set("token", response.data.token, { expires: 10, secure: true });
+      // setToken(response.data.token);
 
-      // Store favorites
-      Cookies.set(
-        "favoritesCh",
-        JSON.stringify(response.data.favoriteCharacters),
+      // // Store user infos
+      // Cookies.set("username", response.data.username, {
+      //   expires: 10,
+      //   secure: true,
+      // });
+      // setUserConnected(response.data.username);
+
+      // // Store favorites
+      // Cookies.set(
+      //   "favoritesCh",
+      //   JSON.stringify(response.data.favoriteCharacters),
+      //   {
+      //     expires: 10,
+      //     secure: true,
+      //   }
+      // );
+      // Cookies.set("favoritesCo", JSON.stringify(response.data.favoriteComics), {
+      //   expires: 10,
+      //   secure: true,
+      // });
+
+      handleConnectDisconnect(
+        data.token,
         {
-          expires: 10,
-          secure: true,
-        }
+          username: data.username,
+          avatar: data.avatar,
+        },
+        data.favoriteCharacters,
+        data.favoriteComics
       );
-      Cookies.set("favoritesCo", JSON.stringify(response.data.favoriteComics), {
-        expires: 10,
-        secure: true,
-      });
 
       navigate(!location.state?.fromFavorite ? "/" : "/favorite");
     } catch (error) {

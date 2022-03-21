@@ -1,7 +1,7 @@
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import logo from "../assets/img/logoMarvel.png";
 
@@ -11,23 +11,24 @@ const Header = ({
   userConnected,
   setFavoritesCo,
   setFavoritesCh,
+  handleConnectDisconnect,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleDeconnect = () => {
-    Cookies.remove("username");
-    Cookies.remove("token");
-    Cookies.remove("favoritesCh");
-    Cookies.remove("favoritesCo");
+  // const handleDeconnect = () => {
+  //   Cookies.remove("username");
+  //   Cookies.remove("token");
+  //   Cookies.remove("favoritesCh");
+  //   Cookies.remove("favoritesCo");
 
-    setFavoritesCh([]);
-    setFavoritesCo([]);
+  //   setFavoritesCh([]);
+  //   setFavoritesCo([]);
 
-    setToken("");
+  //   setToken("");
 
-    navigate("/");
-  };
+  //   navigate("/");
+  // };
 
   return token ? (
     <header>
@@ -58,14 +59,24 @@ const Header = ({
 
         <div>
           <div>
-            <span>
+            {/* <div className="avatar"> */}
+            <img src={userConnected.avatar} alt="avatar" className="avatar" />
+            {/* </div> */}
+            {/* <span>
               <FontAwesomeIcon icon="user" />
-            </span>
+            </span> */}
 
-            <p>Welcome {userConnected} !</p>
+            <p>Welcome {userConnected.username} !</p>
           </div>
 
-          <button onClick={handleDeconnect}>Deconnexion</button>
+          <button
+            onClick={() => {
+              handleConnectDisconnect(null);
+              navigate("/");
+            }}
+          >
+            Deconnexion
+          </button>
         </div>
       </div>
     </header>
