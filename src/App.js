@@ -35,8 +35,8 @@ function App() {
   // Token
   const [token, setToken] = useState(Cookies.get("token") || null);
 
-  const baseUrl = "https://marvel-backend-gwendoline.herokuapp.com";
-  // const baseUrl = "http://localhost:3001";
+  // const baseUrl = "https://marvel-backend-gwendoline.herokuapp.com";
+  const baseUrl = "http://localhost:3001";
 
   const handleConnectDisconnect = (token, userInfos, favCh, favCo) => {
     if (token) {
@@ -68,9 +68,11 @@ function App() {
         token={token}
         setToken={setToken}
         userConnected={userConnected}
+        setUserConnected={setUserConnected}
         setFavoritesCh={setFavoriteCharacters}
         setFavoritesCo={setFavoriteComics}
         handleConnectDisconnect={handleConnectDisconnect}
+        baseUrl={baseUrl}
       />
       <Routes>
         <Route
