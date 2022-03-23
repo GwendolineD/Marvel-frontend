@@ -10,12 +10,12 @@ const Comics = ({ favoritesCo, setFavoritesCo, token, baseUrl }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataComics, setDataComics] = useState({});
   const [searchTitle, setSearchTitle] = useState("");
-  const [limit, setLimit] = useState(100);
+  const [limit, setLimit] = useState(20);
   const [pageActive, setPageActive] = useState(1);
 
   useEffect(() => {
-    try {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
         const response = await axios.get(
           `${baseUrl}/comics?title=${searchTitle}&limit=${limit}&skip=${
             (pageActive - 1) * limit
@@ -25,12 +25,12 @@ const Comics = ({ favoritesCo, setFavoritesCo, token, baseUrl }) => {
         // console.log(response.data.favoriteComics);
 
         setDataComics(response.data);
-      };
-      fetchData();
-    } catch (error) {
-      console.log("catch comics>>>>>>", error.response);
-    }
-    setIsLoading(false);
+      } catch (error) {
+        console.log("catch comics>>>>>>", error.response);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
   }, [searchTitle, limit, pageActive, baseUrl]);
 
   const numberOfPages = Math.ceil(dataComics.count / limit);
@@ -72,6 +72,7 @@ const Comics = ({ favoritesCo, setFavoritesCo, token, baseUrl }) => {
                 favoritesCo={favoritesCo}
                 setFavoritesCo={setFavoritesCo}
                 token={token}
+                baseUrl={baseUrl}
               />
             );
           })}

@@ -9,8 +9,8 @@ const Modal = ({
   actualAvatar,
   baseUrl,
   token,
-  setUserConnected,
   actualUsername,
+  handleConnectDisconnect,
 }) => {
   const [currentAvatar, setCurrentAvatar] = useState(actualAvatar);
   const [message, setMessage] = useState("");
@@ -38,10 +38,17 @@ const Modal = ({
         );
         // console.log("data>>>", data);
 
-        setUserConnected({
-          username: data.username,
-          avatar: data.avatar,
-        });
+        // update the cookies
+        handleConnectDisconnect(
+          data.token,
+          {
+            username: data.username,
+            avatar: data.avatar,
+          },
+          data.favoriteCharacters,
+          data.favoriteComics
+        );
+
         setMessage("Changement validé !");
 
         setTimeout(() => {

@@ -40,7 +40,7 @@ function App() {
       }
     };
     fetchUserInfos();
-  }, [userConnected]);
+  }, []);
 
   const handleConnectDisconnect = (token, userInfos, favCh, favCo) => {
     if (token) {
@@ -70,14 +70,12 @@ function App() {
     <Router>
       <Header
         token={token}
-        setToken={setToken}
         userConnected={userConnected}
         setUserConnected={setUserConnected}
-        setFavoritesCh={setFavoriteCharacters}
-        setFavoritesCo={setFavoriteComics}
         handleConnectDisconnect={handleConnectDisconnect}
         baseUrl={baseUrl}
       />
+
       <Routes>
         <Route
           path="/"

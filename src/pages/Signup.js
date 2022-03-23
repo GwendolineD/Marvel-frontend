@@ -2,12 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-const Signup = ({
-  setToken,
-  setUserConnected,
-  baseUrl,
-  handleConnectDisconnect,
-}) => {
+const Signup = ({ baseUrl, handleConnectDisconnect }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,57 +12,37 @@ const Signup = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (username && email && password) {
+      try {
+        const { data } = await axios.post(`${baseUrl}/signup`, {
+          username: username,
+          email: email,
+          password: password,
+        });
 
-    try {
-      const { data } = await axios.post(`${baseUrl}/signup`, {
-        username: username,
-        email: email,
-        password: password,
-      });
+        // console.log("data>>>", data);
 
-      console.log("data>>>", data);
+        handleConnectDisconnect(
+          data.token,
+          {
+            username: data.username,
+            avatar: data.avatar,
+          },
+          data.favoriteCharacters,
+          data.favoriteComics
+        );
 
-      handleConnectDisconnect(
-        data.token,
-        {
-          username: data.username,
-          avatar: data.avatar,
-        },
-        data.favoriteCharacters,
-        data.favoriteComics
-      );
-
-      // // Store the token
-      // Cookies.set("token", response.data.token, { expires: 10, secure: true });
-      // setToken(response.data.token);
-
-      // // Store user infos
-      // Cookies.set("username", response.data.username, {
-      //   expires: 10,
-      //   secure: true,
-      // });
-      // setUserConnected(response.data.username);
-
-      // // Store favorites
-      // Cookies.set(
-      //   "favoritesCh",
-      //   JSON.stringify(response.data.favoriteCharacters),
-      //   {
-      //     expires: 10,
-      //     secure: true,
-      //   }
-      // );
-      // Cookies.set("favoritesCo", JSON.stringify(response.data.favoriteComics), {
-      //   expires: 10,
-      //   secure: true,
-      // });
-
-      navigate("/");
-    } catch (error) {
-      console.log("catch signUp>>>>>>", error.response);
-      if (error.response) {
-        setErrorMessage(error.response.data.message);
+        navigate("/");
+      } catch (error) {
+        console.log("catch signUp>>>>>>", error.response);
+        if (error.response.status === 406 || error.response.status === 409) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage("Désolé, l'inscription a échoué.");
+        }
       }
+    } else {
+      setErrorMessage("Veuillez remplir tous les champs.");
     }
   };
 
@@ -81,6 +56,7 @@ const Signup = ({
         <input
           onChange={(event) => {
             setUsername(event.target.value);
+            setErrorMessage("");
           }}
           type="text"
           value={username}
@@ -90,6 +66,7 @@ const Signup = ({
         <input
           onChange={(event) => {
             setEmail(event.target.value);
+            setErrorMessage("");
           }}
           type="email"
           value={email}
@@ -99,6 +76,7 @@ const Signup = ({
         <input
           onChange={(event) => {
             setPassword(event.target.value);
+            setErrorMessage("");
           }}
           type="password"
           required

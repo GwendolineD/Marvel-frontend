@@ -19,19 +19,19 @@ const ComicsCharacter = ({
   const [data, setData] = useState({});
 
   useEffect(() => {
-    try {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
         const response = await axios.get(`${baseUrl}/comics/${characterId}`);
 
         // console.log(response.data);
 
         setData(response.data);
-      };
-      fetchData();
-    } catch (error) {
-      console.log("catch comics characters>>>>>>", error.response);
-    }
-    setIsLoading(false);
+      } catch (error) {
+        console.log("catch comics characters>>>>>>", error.response);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
   }, [characterId, baseUrl]);
 
   return isLoading ? (
@@ -45,6 +45,7 @@ const ComicsCharacter = ({
             favoritesCh={favoritesCh}
             setFavoritesCh={setFavoritesCh}
             token={token}
+            baseUrl={baseUrl}
           />
         </div>
 
@@ -61,6 +62,7 @@ const ComicsCharacter = ({
                 favoritesCo={favoritesCo}
                 setFavoritesCo={setFavoritesCo}
                 token={token}
+                baseUrl={baseUrl}
               />
             );
           })}

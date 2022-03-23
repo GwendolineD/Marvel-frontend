@@ -2,12 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
-const Login = ({
-  setToken,
-  setUserConnected,
-  baseUrl,
-  handleConnectDisconnect,
-}) => {
+const Login = ({ baseUrl, handleConnectDisconnect }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,55 +13,36 @@ const Login = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const { data } = await axios.post(`${baseUrl}/login`, {
-        email: email,
-        password: password,
-      });
+    if (email && password) {
+      try {
+        const { data } = await axios.post(`${baseUrl}/login`, {
+          email: email,
+          password: password,
+        });
 
-      console.log("data>>>>", data);
+        console.log("data>>>>", data);
 
-      // // Store token
-      // Cookies.set("token", response.data.token, { expires: 10, secure: true });
-      // setToken(response.data.token);
+        handleConnectDisconnect(
+          data.token,
+          {
+            username: data.username,
+            avatar: data.avatar,
+          },
+          data.favoriteCharacters,
+          data.favoriteComics
+        );
 
-      // // Store user infos
-      // Cookies.set("username", response.data.username, {
-      //   expires: 10,
-      //   secure: true,
-      // });
-      // setUserConnected(response.data.username);
-
-      // // Store favorites
-      // Cookies.set(
-      //   "favoritesCh",
-      //   JSON.stringify(response.data.favoriteCharacters),
-      //   {
-      //     expires: 10,
-      //     secure: true,
-      //   }
-      // );
-      // Cookies.set("favoritesCo", JSON.stringify(response.data.favoriteComics), {
-      //   expires: 10,
-      //   secure: true,
-      // });
-
-      handleConnectDisconnect(
-        data.token,
-        {
-          username: data.username,
-          avatar: data.avatar,
-        },
-        data.favoriteCharacters,
-        data.favoriteComics
-      );
-
-      navigate(!location.state?.fromFavorite ? "/" : "/favorite");
-    } catch (error) {
-      console.log("catch logIn>>>>>>", error.response);
-      if (error.response && error.response.status === 401) {
-        setErrorMessage(error.response.data.message);
+        navigate(!location.state?.fromFavorite ? "/" : "/favorite");
+      } catch (error) {
+        console.log("catch logIn>>>>>>", error.response);
+        if (error.response.status === 401) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage("Désolé, la connexion a échoué.");
+        }
       }
+    } else {
+      setErrorMessage("Veuillez remplir tous les champs.");
     }
   };
 
@@ -79,6 +55,7 @@ const Login = ({
         <input
           onChange={(event) => {
             setEmail(event.target.value);
+            setErrorMessage("");
           }}
           type="email"
           value={email}
@@ -88,6 +65,7 @@ const Login = ({
         <input
           onChange={(event) => {
             setPassword(event.target.value);
+            setErrorMessage("");
           }}
           type="password"
           value={password}
