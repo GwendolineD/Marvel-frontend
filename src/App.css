@@ -145,7 +145,7 @@ header .container > div:nth-child(3) a {
 .modal {
   width: 80vw;
   height: 80vh;
-  padding: 40px;
+  padding: 20px;
   box-sizing: border-box;
   text-align: center;
   background-color: black;
@@ -158,9 +158,15 @@ header .container > div:nth-child(3) a {
 .modal p {
   margin-bottom: 20px;
 }
-.currentAvatar p {
-  font-weight: bold;
-  font-size: 20px;
+.currentAvatar input {
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100px;
+  border: none;
+  color: white;
+  background-color: var(--lessBlack);
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 .currentAvatar img {
   width: 150px;
@@ -173,22 +179,37 @@ header .container > div:nth-child(3) a {
   align-items: center;
 }
 .avatars {
-  border: #f0141e 1px solid;
   width: 80%;
   display: flex;
   justify-content: center;
   gap: 25px;
   flex-wrap: wrap;
 }
+.avatars img {
+  cursor: pointer;
+}
 .buttonsModal {
   width: 30%;
   display: flex;
   justify-content: space-around;
 }
+.bottomModal p {
+  color: var(--lessBlack);
+  margin-bottom: 0px;
+}
+.buttonsModal {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  /* border: #fff 1px solid; */
+  width: 100%;
+  margin: 20px 0;
+}
 .buttonsModal > div {
   border: #f0141e 1px solid;
   padding: 5px 10px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 /* ------------------------------ */

@@ -83,7 +83,7 @@ const Header = ({
               <FontAwesomeIcon icon="user" />
             </span> */}
 
-            <p>Welcome {userConnected.username} !</p>
+            <p>Bienvenue {userConnected.username} !</p>
           </div>
 
           <button
@@ -103,6 +103,7 @@ const Header = ({
           baseUrl={baseUrl}
           token={token}
           setUserConnected={setUserConnected}
+          actualUsername={userConnected.username}
         />
       )}
     </header>

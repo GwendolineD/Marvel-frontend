@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
 import Header from "./components/Header";
@@ -17,26 +17,30 @@ import { faUser, faGrinHearts } from "@fortawesome/free-solid-svg-icons";
 library.add(faUser, faGrinHearts);
 
 function App() {
-  // Favorites' Characters
-  const favoriteCh = Cookies.get("favoritesCh");
-  const [favoriteCharacters, setFavoriteCharacters] = useState(
-    favoriteCh ? JSON.parse(Cookies.get("favoritesCh")) : []
-  );
-  // Favorites' Comics
-  const favoriteCo = Cookies.get("favoritesCo");
-  const [favoriteComics, setFavoriteComics] = useState(
-    favoriteCo ? JSON.parse(Cookies.get("favoritesCo")) : []
-  );
-  // Username and avatar
-  const userInfos = Cookies.get("userInfos");
-  const [userConnected, setUserConnected] = useState(
-    userInfos ? JSON.parse(Cookies.get("userInfos")) : {}
-  );
-  // Token
-  const [token, setToken] = useState(Cookies.get("token") || null);
+  const [favoriteCharacters, setFavoriteCharacters] = useState([]);
+  const [favoriteComics, setFavoriteComics] = useState([]);
+  const [userConnected, setUserConnected] = useState({});
+  const [token, setToken] = useState(null);
 
   // const baseUrl = "https://marvel-backend-gwendoline.herokuapp.com";
   const baseUrl = "http://localhost:3001";
+
+  useEffect(() => {
+    const fetchUserInfos = () => {
+      const token = Cookies.get("token");
+      const userInfos = Cookies.get("userInfos");
+      const favoriteCh = Cookies.get("favoritesCh");
+      const favoriteCo = Cookies.get("favoritesCo");
+
+      if (token) {
+        setToken(token);
+        setUserConnected(JSON.parse(userInfos));
+        setFavoriteCharacters(JSON.parse(favoriteCh));
+        setFavoriteComics(JSON.parse(favoriteCo));
+      }
+    };
+    fetchUserInfos();
+  }, [userConnected]);
 
   const handleConnectDisconnect = (token, userInfos, favCh, favCo) => {
     if (token) {
