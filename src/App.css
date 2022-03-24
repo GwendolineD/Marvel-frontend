@@ -91,7 +91,7 @@ header .container > div:nth-child(3) div {
   align-items: center;
 }
 header .container > div:nth-child(3) div span {
-  font-size: 35px;
+  font-size: 16px;
   color: var(--redMarvel);
   margin-bottom: 10px;
 }
@@ -112,7 +112,6 @@ header .container > div:nth-child(3) a {
   position: relative;
 }
 .avatar {
-  /* border: 1px solid var(--redMarvel); */
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -201,7 +200,6 @@ header .container > div:nth-child(3) a {
   display: flex;
   justify-content: center;
   gap: 15px;
-  /* border: #fff 1px solid; */
   width: 100%;
   margin: 20px 0;
 }
@@ -350,7 +348,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* ------------------------------------ */
-/* PERSONNAGES et COMICS */
+/* CHARACTERS AND COMICS */
 /* ------------------------------------------ */
 
 .page {
@@ -482,6 +480,7 @@ input::-webkit-inner-spin-button {
 }
 .comicsCh span {
   font-weight: bold;
+  color: rgb(151, 148, 148);
 }
 
 /* --------------------------------------- */
@@ -496,6 +495,8 @@ input::-webkit-inner-spin-button {
 }
 .favoris {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .noFavorite {
   width: 600px;
@@ -529,6 +530,9 @@ input::-webkit-inner-spin-button {
 .notFavorite {
   color: var(--lessBlack);
 }
+.comicTitle {
+  margin-left: 20px;
+}
 
 /* --------------------------------------- */
 /* FOOTER */
@@ -561,6 +565,15 @@ footer a {
   .card img {
     width: 185px;
   }
+  /* 1050px - 1214px - pagination */
+  .pagination {
+    padding: 0 10px;
+  }
+
+  /* 1050px - 1214px - header */
+  .logo {
+    height: 90px;
+  }
 }
 
 /* ----------------- */
@@ -575,6 +588,123 @@ footer a {
   }
   .card img {
     width: 200px;
+  }
+  .page h1 {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+  .page input[type="search"] {
+    width: 300px;
+    height: 30px;
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 25px;
+  }
+  .page > img {
+    height: 250px;
+  }
+
+  /* 620px - 1050px - pagination */
+  .pagination {
+    padding: 0 10px;
+  }
+
+  /* 620px - 1050px - comic's character */
+  .comicsCh h1 {
+    font-size: 18px;
+  }
+
+  /* 620px - 1050px - header */
+  header .container > div:nth-child(2) {
+    font-size: 14px;
+  }
+  .logo {
+    height: 65px;
+  }
+  header .container > div:nth-child(3) div span {
+    font-size: 11px;
+  }
+  header button {
+    padding: 5px 7px;
+    color: white;
+    font-size: 12px;
+  }
+  header .container > div:nth-child(3) a {
+    padding: 5px 7px;
+    font-size: 14px;
+  }
+  .avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .exchange {
+    height: 10px;
+    width: 10px;
+  }
+
+  /* 620px - 1050px - signUp and LogIn */
+  .formPage h1 {
+    font-size: 20px;
+  }
+  .formPage form h2 {
+    font-size: 14px;
+  }
+  .formPage a {
+    font-size: 13px;
+  }
+  .errorMessage {
+    font-size: 14px;
+  }
+
+  /* 620px - 1050px - favorites */
+  /* .favorisPage {
+    background-color: black;
+    color: white;
+    padding: 40px 0;
+    min-height: calc(100vh - 200px);
+  } */
+  .favoris {
+    /* border: #d8e65e solid 1px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 40px;
+  }
+  .noFavorite {
+    width: 600px;
+    /* border: #797676 solid 1px; */
+    font-size: 14px;
+  }
+  .comicNoFav {
+    width: 600px;
+    font-size: 14px;
+  }
+  .favCh {
+    border-right: none;
+    padding-right: 0px;
+  }
+  .favCo {
+    border-left: none;
+    padding-left: 0px;
+  }
+  .favoris h2 {
+    /* font-family: var(--police1);
+    font-weight: bold; */
+    font-size: 16px;
+    /* margin-bottom: 20px; */
+  }
+  .favoris .card:nth-child(even) {
+    margin-left: 0px;
+  }
+  /* .isFavorite,
+  .notFavorite {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-size: 20px;
+  } */
+  .comicTitle {
+    margin-left: 0px;
   }
 }
 
@@ -602,5 +732,177 @@ footer a {
     font-size: 12px;
     line-height: 17px;
     text-align: justify;
+  }
+  .topPage {
+    flex-direction: column;
+  }
+  .page h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  .page input[type="search"] {
+    width: 300px;
+    height: 30px;
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 25px;
+    align-self: center;
+  }
+  .page > img {
+    display: none;
+  }
+
+  /* max 619px - pagination */
+  .pagination {
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  .pagination > div:last-child {
+    flex-direction: column-reverse;
+    gap: 15px;
+  }
+  .pagination > div:last-child > div {
+    text-align: end;
+  }
+  .pagination input[type="number"] {
+    background-color: var(--lessBlack);
+    border: none;
+    width: 25px;
+    font-size: 14px;
+    text-align: end;
+    font-family: inherit;
+    padding-left: 5px 0;
+    border-radius: 3px;
+    margin-left: 50px;
+    outline: none;
+  }
+  .perPage {
+    gap: 4px;
+  }
+  .page > img {
+    width: 100vw;
+    height: 300px;
+    padding-top: 2px;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  /* max 619px - comic's character */
+  .comicsCh h1 {
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
+  /* max 619px - header */
+  header .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header .container > div:nth-child(2) {
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 40px;
+    margin-top: 15px;
+  }
+  header .container > div:nth-child(3) {
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: center;
+    gap: 20px;
+  }
+  .logo {
+    height: 65px;
+  }
+  header .container > div:nth-child(3) div span {
+    font-size: 11px;
+  }
+  header button {
+    padding: 5px 7px;
+    color: white;
+    font-size: 12px;
+  }
+  header .container > div:nth-child(3) a {
+    padding: 5px 7px;
+    font-size: 14px;
+  }
+  .avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .exchange {
+    height: 10px;
+    width: 10px;
+  }
+
+  /* max 619px - signUp and LogIn */
+  .formPage h1 {
+    font-size: 18px;
+  }
+  .formPage form h2 {
+    font-size: 13px;
+  }
+  .formPage form input:not(:last-child) {
+    width: 250px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .formPage a {
+    font-size: 12px;
+  }
+  .errorMessage {
+    font-size: 12px;
+  }
+
+  /* max 619px - favorites */
+  /* .favorisPage {
+    background-color: black;
+    color: white;
+    padding: 40px 0;
+    min-height: calc(100vh - 200px);
+    max-width: 100vw;
+  } */
+  .favoris {
+    /* border: #d8e65e solid 1px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 40px;
+  }
+  .noFavorite {
+    width: 600px;
+    /* border: #797676 solid 1px; */
+    font-size: 14px;
+  }
+  .comicNoFav {
+    width: 600px;
+    font-size: 14px;
+  }
+  .favCh {
+    border-right: none;
+    padding-right: 0px;
+  }
+  .favCo {
+    border-left: none;
+    padding-left: 0px;
+  }
+  .favoris h2 {
+    /* font-family: var(--police1);
+    font-weight: bold; */
+    font-size: 16px;
+    /* margin-bottom: 20px; */
+  }
+  .favoris .card:nth-child(even) {
+    margin-left: 0px;
+  }
+  /* .isFavorite,
+  .notFavorite {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-size: 20px;
+  } */
+  .comicTitle {
+    margin-left: 0px;
   }
 }

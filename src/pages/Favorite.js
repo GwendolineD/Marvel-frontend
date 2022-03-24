@@ -42,11 +42,13 @@ const Favorite = ({
         </div>
 
         <div>
-          <h2 style={{ marginLeft: 20 }}>Comics favoris</h2>
+          <h2 className="comicTitle">Comics favoris</h2>
 
           <div className="favCo">
             {favoriteComics.length === 0 ? (
-              <div>Vous n'avez pas encore de comics favoris</div>
+              <div className="comicNoFav">
+                Vous n'avez pas encore de comics favoris
+              </div>
             ) : (
               favoriteComics.map((comic) => {
                 return (

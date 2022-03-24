@@ -60,7 +60,7 @@ const Header = ({
               </svg>
             </div>
 
-            <p>Bienvenue {userConnected.username} !</p>
+            <span>Bienvenue {userConnected.username} !</span>
           </div>
 
           <button
