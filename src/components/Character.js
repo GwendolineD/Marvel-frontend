@@ -18,7 +18,7 @@ const Character = ({
 
   //keep favorite in memory
   useEffect(() => {
-    if (favoritesCh.indexOf(character._id) !== -1) {
+    if (favoritesCh.findIndex((fav) => fav._id === character._id) !== -1) {
       setIsFavorite(true);
     }
   }, [character._id, favoritesCh]);
@@ -29,8 +29,10 @@ const Character = ({
       try {
         //add a favorite character
         if (!isFavorite) {
+          console.log("ch>>>>", character);
           const newTab = [...favoritesCh];
-          newTab.push(character._id);
+          newTab.push(character);
+
           const { data } = await axios.post(
             `${baseUrl}/changeFavorite`,
             {
@@ -48,14 +50,12 @@ const Character = ({
             expires: 10,
             secure: true,
           });
-
-          setIsFavorite(true);
         } else {
           //remove a favorite character
           const newTab = favoritesCh.filter(
-            (favorite) => favorite !== character._id
+            (favorite) => favorite._id !== character._id
           );
-          const response = await axios.post(
+          const { data } = await axios.post(
             `${baseUrl}/changeFavorite`,
             {
               favoriteCharacters: newTab,
@@ -66,19 +66,13 @@ const Character = ({
               },
             }
           );
-          setFavoritesCh(response.data.favoriteCharacters);
-          Cookies.set(
-            "favoritesCh",
-            JSON.stringify(response.data.favoriteCharacters),
-            {
-              expires: 10,
-              secure: true,
-            }
-          );
-          setIsFavorite(false);
+          setFavoritesCh(data.favoriteCharacters);
+          Cookies.set("favoritesCh", JSON.stringify(data.favoriteCharacters), {
+            expires: 10,
+            secure: true,
+          });
         }
-
-        // setIsFavorite(!isFavorite);
+        setIsFavorite(!isFavorite);
       } catch (error) {
         console.log("catch character component>>>>", error.response);
       }

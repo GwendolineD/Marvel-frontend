@@ -12,7 +12,7 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token, baseUrl }) => {
 
   //keep favorite in memory
   useEffect(() => {
-    if (favoritesCo.indexOf(comic._id) !== -1) {
+    if (favoritesCo.findIndex((fav) => fav._id === comic._id) !== -1) {
       setIsFavorite(true);
     }
   }, [comic, favoritesCo]);
@@ -24,9 +24,9 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token, baseUrl }) => {
         if (!isFavorite) {
           //add
           const newTab = [...favoritesCo];
-          newTab.push(comic._id);
+          newTab.push(comic);
 
-          const response = await axios.post(
+          const { data } = await axios.post(
             `${baseUrl}/changeFavorite`,
             {
               favoriteComics: newTab,
@@ -37,22 +37,18 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token, baseUrl }) => {
               },
             }
           );
-          setFavoritesCo(response.data.favoriteComics);
-          Cookies.set(
-            "favoritesCo",
-            JSON.stringify(response.data.favoriteComics),
-            {
-              expires: 10,
-              secure: true,
-            }
-          );
+          setFavoritesCo(data.favoriteComics);
+          Cookies.set("favoritesCo", JSON.stringify(data.favoriteComics), {
+            expires: 10,
+            secure: true,
+          });
         } else {
           //remove
           const newTab = favoritesCo.filter(
-            (favorite) => favorite !== comic._id
+            (favorite) => favorite._id !== comic._id
           );
 
-          const response = await axios.post(
+          const { data } = await axios.post(
             `${baseUrl}/changeFavorite`,
             {
               favoriteComics: newTab,
@@ -64,15 +60,11 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token, baseUrl }) => {
             }
           );
 
-          setFavoritesCo(response.data.favoriteComics);
-          Cookies.set(
-            "favoritesCo",
-            JSON.stringify(response.data.favoriteComics),
-            {
-              expires: 10,
-              secure: true,
-            }
-          );
+          setFavoritesCo(data.favoriteComics);
+          Cookies.set("favoritesCo", JSON.stringify(data.favoriteComics), {
+            expires: 10,
+            secure: true,
+          });
         }
 
         setIsFavorite(!isFavorite);

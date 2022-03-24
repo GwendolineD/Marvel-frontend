@@ -22,7 +22,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
             (pageActive - 1) * limit
           }`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setDataCharacters(response.data);
       } catch (error) {
         console.log("catch characters>>>>>>", error.response);
