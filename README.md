@@ -3,7 +3,7 @@
 </div>
 
 <div align="center">
-  <h1> Marvel </h1>
+  <h1> Marvel project</h1>
 </div>
 
 <div align="center">
@@ -24,13 +24,13 @@
 ## 📸 Screen shots
 
 <div align="center" >
-<img width="500"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207297/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.05.18_Medium_c1pxvg.jpg">
-  <img width="500"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207310/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.05.11_Large_wcbsfx.jpg">
+<img width="450"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207297/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.05.18_Medium_c1pxvg.jpg">
+  <img width="450"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207310/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.05.11_Large_wcbsfx.jpg">
   </div>
   
 <div align="center">
-  <img width="500"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207314/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.06.42_w6qrsr.png">
-  <img width="500"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207323/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.06.32_z3bjnz.png">
+  <img width="450"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207314/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.06.42_w6qrsr.png">
+  <img width="450"  src="https://res.cloudinary.com/du3ko16j1/image/upload/v1648207323/Marvel/Capture_d_e%CC%81cran_2022-03-25_a%CC%80_12.06.32_z3bjnz.png">
 </div>
 
 ## 🛠 Technologies, packages ...
