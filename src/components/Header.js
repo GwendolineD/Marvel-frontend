@@ -30,12 +30,14 @@ const Header = ({
           <Link to="/" className={location.pathname === "/" ? "white" : "grey"}>
             Personnages
           </Link>
+
           <Link
             to="/comics"
             className={location.pathname === "/comics" ? "white" : "grey"}
           >
             Comics
           </Link>
+
           <Link
             to="/favorite"
             className={location.pathname === "/favorite" ? "white" : "grey"}
@@ -48,6 +50,7 @@ const Header = ({
           <div>
             <div className="avatarContainer">
               <img src={userConnected.avatar} alt="avatar" className="avatar" />
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -98,12 +101,14 @@ const Header = ({
           <Link to="/" className={location.pathname === "/" ? "white" : "grey"}>
             Personnages
           </Link>
+
           <Link
             to="/comics"
             className={location.pathname === "/comics" ? "white" : "grey"}
           >
             Comics
           </Link>
+
           <Link
             to="/favorite"
             className={location.pathname === "/favorite" ? "white" : "grey"}
@@ -114,6 +119,7 @@ const Header = ({
 
         <div>
           <Link to="/signup">Inscription</Link>
+
           <Link to="/login">Connexion</Link>
         </div>
       </div>

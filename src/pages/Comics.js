@@ -16,15 +16,15 @@ const Comics = ({ favoritesCo, setFavoritesCo, token, baseUrl }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
+        const { data } = await axios.get(
           `${baseUrl}/comics?title=${searchTitle}&limit=${limit}&skip=${
             (pageActive - 1) * limit
           }`
         );
 
-        // console.log(response.data.favoriteComics);
+        // console.log(data.favoriteComics);
 
-        setDataComics(response.data);
+        setDataComics(data);
       } catch (error) {
         console.log("catch comics>>>>>>", error.response);
       }

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Character = ({
@@ -29,7 +29,6 @@ const Character = ({
       try {
         //add a favorite character
         if (!isFavorite) {
-          console.log("ch>>>>", character);
           const newTab = [...favoritesCh];
           newTab.push(character);
 
@@ -46,6 +45,7 @@ const Character = ({
           );
 
           setFavoritesCh(data.favoriteCharacters);
+
           Cookies.set("favoritesCh", JSON.stringify(data.favoriteCharacters), {
             expires: 10,
             secure: true,
@@ -67,6 +67,7 @@ const Character = ({
             }
           );
           setFavoritesCh(data.favoriteCharacters);
+
           Cookies.set("favoritesCh", JSON.stringify(data.favoriteCharacters), {
             expires: 10,
             secure: true,

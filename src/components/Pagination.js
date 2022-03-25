@@ -57,7 +57,7 @@ const Pagination = ({
               }}
               className={limit === 100 ? "bold" : undefined}
             >
-              100{" "}
+              100
             </p>
             éléments par page
           </div>
@@ -74,7 +74,7 @@ const Pagination = ({
               value={pageActive}
               min="1"
               max={numberOfPages}
-            />{" "}
+            />
             sur {numberOfPages} pages
           </div>
         </div>

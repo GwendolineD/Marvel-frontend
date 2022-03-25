@@ -61,6 +61,7 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token, baseUrl }) => {
           );
 
           setFavoritesCo(data.favoriteComics);
+
           Cookies.set("favoritesCo", JSON.stringify(data.favoriteComics), {
             expires: 10,
             secure: true,

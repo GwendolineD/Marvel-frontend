@@ -75,11 +75,13 @@ const Modal = ({
               }}
             />
           </div>
+
           <img src={currentAvatar} alt="avatar actuel" />
         </div>
 
         <div className="avatarSection">
           <p>Sélectionnez votre nouvel avatar :</p>
+
           <div className="avatars">
             {avatars.map((imgUrl, index) => {
               return (
@@ -118,6 +120,7 @@ const Modal = ({
 
               <div onClick={changeAvatar}>Valider le changement</div>
             </div>
+
             {message && <p>{message}</p>}
           </div>
         )}

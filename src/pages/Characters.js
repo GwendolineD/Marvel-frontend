@@ -17,13 +17,13 @@ const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
+        const { data } = await axios.get(
           `${baseUrl}/characters?name=${searchName}&limit=${limit}&skip=${
             (pageActive - 1) * limit
           }`
         );
-        // console.log(response.data);
-        setDataCharacters(response.data);
+        // console.log(data);
+        setDataCharacters(data);
       } catch (error) {
         console.log("catch characters>>>>>>", error.response);
       }
@@ -79,6 +79,7 @@ const Characters = ({ favoritesCh, setFavoritesCh, token, baseUrl }) => {
           })}
         </div>
 
+        {/* Pagination at the bottom of the page */}
         <ReactPaginate
           breakLabel="..."
           onPageChange={(event) => {

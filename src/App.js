@@ -22,8 +22,8 @@ function App() {
   const [userConnected, setUserConnected] = useState({});
   const [token, setToken] = useState(null);
 
-  // const baseUrl = "https://marvel-backend-gwendoline.herokuapp.com";
-  const baseUrl = "http://localhost:3001";
+  const baseUrl = "https://marvel-backend-gwendoline.herokuapp.com";
+  // const baseUrl = "http://localhost:3001";
 
   useEffect(() => {
     const fetchUserInfos = () => {

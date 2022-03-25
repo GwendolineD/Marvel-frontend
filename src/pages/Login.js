@@ -20,7 +20,7 @@ const Login = ({ baseUrl, handleConnectDisconnect }) => {
           password: password,
         });
 
-        console.log("data>>>>", data);
+        // console.log("data>>>>", data);
 
         handleConnectDisconnect(
           data.token,
@@ -35,6 +35,7 @@ const Login = ({ baseUrl, handleConnectDisconnect }) => {
         navigate(!location.state?.fromFavorite ? "/" : "/favorite");
       } catch (error) {
         console.log("catch logIn>>>>>>", error.response);
+
         if (error.response.status === 401) {
           setErrorMessage(error.response.data.message);
         } else {

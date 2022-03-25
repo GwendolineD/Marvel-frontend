@@ -35,6 +35,7 @@ const Signup = ({ baseUrl, handleConnectDisconnect }) => {
         navigate("/");
       } catch (error) {
         console.log("catch signUp>>>>>>", error.response);
+
         if (error.response.status === 406 || error.response.status === 409) {
           setErrorMessage(error.response.data.message);
         } else {
@@ -52,7 +53,6 @@ const Signup = ({ baseUrl, handleConnectDisconnect }) => {
 
       <form onSubmit={handleSubmit}>
         <h2>Nom</h2>
-
         <input
           onChange={(event) => {
             setUsername(event.target.value);

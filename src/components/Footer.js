@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer>
       <p>
-        Made by{" "}
+        Made by
         <span>
           <a
             href="https://github.com/GwendolineD"
