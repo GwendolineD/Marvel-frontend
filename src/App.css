@@ -156,7 +156,7 @@ header .container > div:nth-child(3) a {
   align-items: center;
 }
 .modal p {
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 .currentAvatar input {
   margin-bottom: 10px;
@@ -399,7 +399,7 @@ input::-webkit-inner-spin-button {
   border: 1px solid var(--lessBlack);
   box-shadow: 0 0 10px var(--lessBlack);
   height: 210px;
-  width: 590px;
+  width: 585px;
   border-spacing: 10px;
   box-sizing: border-box;
   margin-bottom: 20px;

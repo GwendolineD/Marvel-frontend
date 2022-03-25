@@ -14,6 +14,8 @@ const Comic = ({ comic, favoritesCo, setFavoritesCo, token, baseUrl }) => {
   useEffect(() => {
     if (favoritesCo.findIndex((fav) => fav._id === comic._id) !== -1) {
       setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
     }
   }, [comic, favoritesCo]);
 

@@ -20,6 +20,8 @@ const Character = ({
   useEffect(() => {
     if (favoritesCh.findIndex((fav) => fav._id === character._id) !== -1) {
       setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
     }
   }, [character._id, favoritesCh]);
 
